@@ -1,0 +1,108 @@
+//@version=5
+indicator("Multiple Moving Average", overlay = true)
+
+showMA_1 = input(true, title = "", group = "Moving Averages", inline = "ma1")
+ma_type_1 = input.string("EMA", title="Type", options=["SMA", "EMA", "WMA", "HMA", "RMA", "VWMA", "VWAP"], group='Moving Averages', inline = "ma1")
+length_1 = input.int(19, title="Length", group='Moving Averages', inline = "ma1")
+
+showMA_2 = input(true, title = "", group = "Moving Averages", inline = "ma2")
+ma_type_2 = input.string("EMA", title="Type", options=["SMA", "EMA", "WMA", "HMA", "RMA", "VWMA", "VWAP"], group='Moving Averages', inline = "ma2")
+length_2 = input.int(200, title="Length", group='Moving Averages', inline = "ma2")
+
+showMA_3 = input(false, title = "", group = "Moving Averages", inline = "ma3")
+ma_type_3 = input.string("EMA", title="Type", options=["SMA", "EMA", "WMA", "HMA", "RMA", "VWMA", "VWAP"], group='Moving Averages', inline = "ma3")
+length_3 = input.int(1, title="Length", group='Moving Averages', inline = "ma3")
+
+showMA_4 = input(false, title = "", group = "Moving Averages", inline = "ma4")
+ma_type_4 = input.string("EMA", title="Type", options=["SMA", "EMA", "WMA", "HMA", "RMA", "VWMA", "VWAP"], group='Moving Averages', inline = "ma4")
+length_4 = input.int(1, title="Length", group='Moving Averages', inline = "ma4")
+
+showMA_5 = input(false, title = "", group = "Moving Averages", inline = "ma5")
+ma_type_5 = input.string("EMA", title="Type", options=["SMA", "EMA", "WMA", "HMA", "RMA", "VWMA", "VWAP"], group='Moving Averages', inline = "ma5")
+length_5 = input.int(1, title="Length", group='Moving Averages', inline = "ma5")
+
+ma_1 = ma_type_1 == "SMA" ? ta.sma(close, length_1) : ma_type_1 == "EMA" ? ta.ema(close, length_1) : ma_type_1 == "WMA" ? ta.wma(close, length_1) : ma_type_1 == "HMA" ? ta.hma(close, length_1) : ma_type_1 == "RMA" ? ta.rma(close, length_1) : ma_type_1 == "VWMA" ? ta.vwma(close, length_1) : ta.vwap(close, length_1)
+ma_2 = ma_type_2 == "SMA" ? ta.sma(close, length_2) : ma_type_2 == "EMA" ? ta.ema(close, length_2) : ma_type_2 == "WMA" ? ta.wma(close, length_2) : ma_type_2 == "HMA" ? ta.hma(close, length_2) : ma_type_2 == "RMA" ? ta.rma(close, length_2) : ma_type_2 == "VWMA" ? ta.vwma(close, length_2) : ta.vwap(close, length_2)
+ma_3 = ma_type_3 == "SMA" ? ta.sma(close, length_3) : ma_type_3 == "EMA" ? ta.ema(close, length_3) : ma_type_3 == "WMA" ? ta.wma(close, length_3) : ma_type_3 == "HMA" ? ta.hma(close, length_3) : ma_type_3 == "RMA" ? ta.rma(close, length_3) : ma_type_3 == "VWMA" ? ta.vwma(close, length_3) : ta.vwap(close, length_3)
+ma_4 = ma_type_4 == "SMA" ? ta.sma(close, length_4) : ma_type_4 == "EMA" ? ta.ema(close, length_4) : ma_type_4 == "WMA" ? ta.wma(close, length_4) : ma_type_4 == "HMA" ? ta.hma(close, length_4) : ma_type_4 == "RMA" ? ta.rma(close, length_4) : ma_type_4 == "VWMA" ? ta.vwma(close, length_4) : ta.vwap(close, length_4)
+ma_5 = ma_type_5 == "SMA" ? ta.sma(close, length_5) : ma_type_5 == "EMA" ? ta.ema(close, length_5) : ma_type_5 == "WMA" ? ta.wma(close, length_5) : ma_type_5 == "HMA" ? ta.hma(close, length_5) : ma_type_5 == "RMA" ? ta.rma(close, length_5) : ma_type_5 == "VWMA" ? ta.vwma(close, length_5) : ta.vwap(close, length_5)
+
+plot(ma_1, title="MA 1", color=#b2ebf2, linewidth=1, display = showMA_1 ? display.all : display.none)
+plot(ma_2, title="MA 2", color=#e1bee7, linewidth=1, display = showMA_2 ? display.all : display.none)
+plot(ma_3, title="MA 3", color=color.green, linewidth=1, display = showMA_3 ? display.all : display.none)
+plot(ma_4, title="MA 4", color=color.orange, linewidth=1, display = showMA_4 ? display.all : display.none)
+plot(ma_5, title="MA 5", color=color.purple, linewidth=1, display = showMA_5 ? display.all : display.none)
+
+hideonDWM = input(false, title="Hide VWAP on 1D or Above", group="VWAP Settings")
+var anchor = input.string(defval = "Session", title="Anchor Period",
+ options=["Session", "Week", "Month", "Quarter", "Year", "Decade", "Century", "Earnings", "Dividends", "Splits"], group="VWAP Settings")
+src = input(title = "Source", defval = hlc3, group="VWAP Settings")
+offset = input.int(0, title="Offset", group="VWAP Settings", minval=0)
+
+BANDS_GROUP = "Bands Settings"
+CALC_MODE_TOOLTIP = "Determines the units used to calculate the distance of the bands. When 'Percentage' is selected, a multiplier of 1 means 1%."
+calcModeInput = input.string("Standard Deviation", "Bands Calculation Mode", options = ["Standard Deviation", "Percentage"], group = BANDS_GROUP, tooltip = CALC_MODE_TOOLTIP)
+showBand_1 = input(true, title = "", group = BANDS_GROUP, inline = "band_1")
+bandMult_1 = input.float(1.0, title = "Bands Multiplier #1", group = BANDS_GROUP, inline = "band_1", step = 0.5, minval=0)
+showBand_2 = input(false, title = "", group = BANDS_GROUP, inline = "band_2")
+bandMult_2 = input.float(2.0, title = "Bands Multiplier #2", group = BANDS_GROUP, inline = "band_2", step = 0.5, minval=0)
+showBand_3 = input(false, title = "", group = BANDS_GROUP, inline = "band_3")
+bandMult_3 = input.float(3.0, title = "Bands Multiplier #3", group = BANDS_GROUP, inline = "band_3", step = 0.5, minval=0)
+
+if barstate.islast and ta.cum(volume) == 0
+    runtime.error("No volume is provided by the data vendor.")
+
+new_earnings = request.earnings(syminfo.tickerid, earnings.actual, barmerge.gaps_on, barmerge.lookahead_on, ignore_invalid_symbol=true)
+new_dividends = request.dividends(syminfo.tickerid, dividends.gross, barmerge.gaps_on, barmerge.lookahead_on, ignore_invalid_symbol=true)
+new_split = request.splits(syminfo.tickerid, splits.denominator, barmerge.gaps_on, barmerge.lookahead_on, ignore_invalid_symbol=true)
+
+isNewPeriod = switch anchor
+	"Earnings"  => not na(new_earnings)
+	"Dividends" => not na(new_dividends)
+	"Splits"    => not na(new_split)
+	"Session"   => timeframe.change("D")
+	"Week"      => timeframe.change("W")
+	"Month"     => timeframe.change("M")
+	"Quarter"   => timeframe.change("3M")
+	"Year"      => timeframe.change("12M")
+	"Decade"    => timeframe.change("12M") and year % 10 == 0
+	"Century"   => timeframe.change("12M") and year % 100 == 0
+	=> false
+
+isEsdAnchor = anchor == "Earnings" or anchor == "Dividends" or anchor == "Splits"
+if na(src[1]) and not isEsdAnchor
+	isNewPeriod := true
+
+float vwapValue = na
+float upperBandValue1 = na
+float lowerBandValue1 = na
+float upperBandValue2 = na
+float lowerBandValue2 = na
+float upperBandValue3 = na
+float lowerBandValue3 = na
+
+if not (hideonDWM and timeframe.isdwm)
+    [_vwap, _stdevUpper, _] = ta.vwap(src, isNewPeriod, 1)
+	vwapValue := _vwap
+    stdevAbs = _stdevUpper - _vwap
+	bandBasis = calcModeInput == "Standard Deviation" ? stdevAbs : _vwap * 0.01
+	upperBandValue1 := _vwap + bandBasis * bandMult_1
+	lowerBandValue1 := _vwap - bandBasis * bandMult_1
+	upperBandValue2 := _vwap + bandBasis * bandMult_2
+	lowerBandValue2 := _vwap - bandBasis * bandMult_2
+	upperBandValue3 := _vwap + bandBasis * bandMult_3
+	lowerBandValue3 := _vwap - bandBasis * bandMult_3
+
+plot(vwapValue, title="VWAP", color=#2962FF, offset=offset)
+
+upperBand_1 = plot(upperBandValue1, title="Upper Band #1", color=color.green, offset=offset, display = showBand_1 ? display.all : display.none)
+lowerBand_1 = plot(lowerBandValue1, title="Lower Band #1", color=color.green, offset=offset, display = showBand_1 ? display.all : display.none)
+fill(upperBand_1, lowerBand_1, title="Bands Fill #1", color= color.new(color.green, 95)    , display = showBand_1 ? display.all : display.none)
+
+upperBand_2 = plot(upperBandValue2, title="Upper Band #2", color=color.olive, offset=offset, display = showBand_2 ? display.all : display.none)
+lowerBand_2 = plot(lowerBandValue2, title="Lower Band #2", color=color.olive, offset=offset, display = showBand_2 ? display.all : display.none)
+fill(upperBand_2, lowerBand_2, title="Bands Fill #2", color= color.new(color.olive, 95)    , display = showBand_2 ? display.all : display.none)
+
+upperBand_3 = plot(upperBandValue3, title="Upper Band #3", color=color.teal, offset=offset, display = showBand_3 ? display.all : display.none)
+lowerBand_3 = plot(lowerBandValue3, title="Lower Band #3", color=color.teal, offset=offset, display = showBand_3 ? display.all : display.none)
+fill(upperBand_3, lowerBand_3, title="Bands Fill #3", color= color.new(color.teal, 95)    , display = showBand_3 ? display.all : display.none)
