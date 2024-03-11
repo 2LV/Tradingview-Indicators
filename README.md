@@ -1,5 +1,14 @@
 [Setup](https://github.com/8pz/tradingview-indicators?tab=readme-ov-file#setup) • [Disclaimer](https://github.com/8pz/tradingview-indicators?tab=readme-ov-file#disclaimer) • [License](https://github.com/8pz/tradingview-indicators?tab=readme-ov-file#license)
 
+## [Institutional Supply and Demand Zones](https://github.com/8pz/tradingview-indicators/blob/main/scripts/supply%20and%20demand%20zones)
+This indicator aims to identify price levels where institutional investors have positioned their buy or sell orders. These buy orders establish "demand zones," while sell orders create "supply zones." Identifying these zones enables us to anticipate potential reversals in price trends, allowing us to profitably engage in these significant market movements alongside major institutions. These zones are formed when price action goes from balanced to imbalanced. These zones are based on orders. Unlike standard support and resistance levels, when price breaks below a demand zone or above a supply zone, these zones disappear from the chart. Supply is formed by a green candle followed by a major red candle that is at least double the size of previous green candle. The zone is then charted from the open of the green candle to the highest point in the candle. Vice versa for a demand zone (red candle into green candle). Add it to your chart [here](https://www.tradingview.com/script/eAO9uAu5-Institutional-Supply-and-Demand-Zones/)
+
+These zones are traded by:
+1. Look for a volume spike in a zone
+2. A trend change out of the zone (trendline break, ChoCh, etc)
+
+![image](https://github.com/8pz/tradingview-indicators/assets/70970973/371d2a81-8004-4e53-b89f-de12bdaf6bf2)
+
 ## [Multiple Moving Average](https://github.com/8pz/tradingview-indicators/blob/main/scripts/multiple%20moving%20average) 
 A simple script to plot 5 (SMA, EMA, WMA, HMA, RMA) different moving averages and VWAP.
 
@@ -23,8 +32,6 @@ I do not provide financial advice - my indicator and strategies are intended to 
 The project is licensed under: **CC-NY-BC**
 
 Commercial reuse is strictly prohibited
-
-I can make anything you want -- contact me
 
 - discord @ 123781023
 - tele @ [onasn](https://t.me/onasn)
