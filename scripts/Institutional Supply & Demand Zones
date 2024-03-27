@@ -36,34 +36,32 @@ displayW = input.bool(false, title="Show 1W Zones", group = 'Timeframe Options')
 
 currentTimeframe = timeframe.period
 
-if timeframe.period == 'D'
+if currentTimeframe == 'D'
     currentTimeframe := '1440'
-if timeframe.period == 'W'
+if currentTimeframe == 'W'
     currentTimeframe := '10080'
 if displayLowerTFZones
     currentTimeframe := '0'
 
-momentCTD = math.round(time(timeframe.period) + (zoneOffset * 60000 * str.tonumber(timeframe.period)))
+momentCTD = math.round(time(timeframe.period) + (zoneOffset * 60000 * str.tonumber(currentTimeframe)))
 
-if textSize == 'Auto'
-    textSize := size.auto
-if textSize == 'Tiny'
-    textSize := size.tiny
-if textSize == 'Small'
-    textSize := size.small
-if textSize == 'Normal'
-    textSize := size.normal
-if textSize == 'Large'
-    textSize := size.large
-if textSize == 'Huge'
-    textSize := size.huge
+textSize := switch textSize
+    "Auto" => size.auto
+    "Tiny" => size.tiny
+    "Small" => size.small
+    "Normal" => size.normal
+    "Large"   => size.large
+    "Huge" => size.huge
 
-if halign == 'Left'
-    halign := text.align_left
-if halign == 'Center'
-    halign := text.align_center
-if halign == 'Right'
-    halign := text.align_right
+halign := switch halign
+    'Left'=> text.align_left
+    'Center' => text.align_center
+    'Right' => text.align_right
+
+supplyValign := switch supplyValign
+    'Bottom'=> text.align_bottom
+    'Center' => text.align_center
+    'Top' => text.align_top
 
 if supplyValign == 'Bottom'
     supplyValign := text.align_bottom
@@ -72,12 +70,10 @@ if supplyValign == 'Center'
 if supplyValign == 'Top'
     supplyValign := text.align_top
 
-if demandValign == 'Bottom'
-    demandValign := text.align_bottom
-if demandValign == 'Center'
-    demandValign := text.align_center
-if demandValign == 'Top'
-    demandValign := text.align_top
+demandValign := switch demandValign
+    'Bottom'=> text.align_bottom
+    'Center' => text.align_center
+    'Top' => text.align_top
 
 var box[] supply_HT = array.new_box()
 var box[] demand_HT = array.new_box()
@@ -88,32 +84,19 @@ createSupplyDemandZones(timeframe) =>
 
     [open_HT, high_HT, low_HT, close_HT] = request.security(syminfo.tickerid, timeframe, [open[1], high[1], low[1], close[1]], lookahead = barmerge.lookahead_on)
 
-    var timeframeFormatted = ''
-
-    if timeframe == '1'
-        timeframeFormatted := '1m'
-    else if timeframe == '3'
-        timeframeFormatted := '3m'
-    else if timeframe == '5'
-        timeframeFormatted := '5m'
-    else if timeframe == '15'
-        timeframeFormatted := '15m'
-    else if timeframe == '30'
-        timeframeFormatted := '30m'
-    else if timeframe == '45'
-        timeframeFormatted := '45m'
-    else if timeframe == '60'
-        timeframeFormatted := '1h'
-    else if timeframe == '120'
-        timeframeFormatted := '2h'
-    else if timeframe == '180'
-        timeframeFormatted := '3h'
-    else if timeframe == '240'
-        timeframeFormatted := '4h'
-    else if timeframe == 'D'
-        timeframeFormatted := '1D'
-    else if timeframe == 'W'
-        timeframeFormatted := '1W'
+    var timeframeFormatted = switch timeframe
+        '1' => '1m'
+        '3' => '3m'
+        '5' => '5m'
+        '16' => '15m'
+        '30' => '30m'
+        '45' => '45m'
+        '60' => '1h'
+        '120' => '2h'
+        '180' => '3h'
+        '240' => '4h'
+        'D' => '1D'
+        'W' => '1W'
 
     redCandle_HT = close_HT < open_HT
     greenCandle_HT = close_HT > open_HT
@@ -122,6 +105,7 @@ createSupplyDemandZones(timeframe) =>
 
     var float bottomBox_HT = na
     var float topBox_HT = na
+    momentCTD_HT = time(timeframe)[2]
 
     if (((redCandle_HT and greenCandle_HT[1]) or (redCandle_HT and neutralCandle_HT[1])) and (candleChange_HT / candleChange_HT[1]) >= candleDifferenceScale and barstate.isconfirmed[1] and supplyEnable and close_HT[1] >= close_HT and open_HT[1] <= open_HT)
         if displayHL
@@ -131,7 +115,7 @@ createSupplyDemandZones(timeframe) =>
         else 
             topBox_HT := high_HT[1]
 
-        box supply = box.new(left=time(timeframe)[2], top=topBox_HT, right=momentCTD, bgcolor=supplyColor, bottom=open_HT[1], xloc=xloc.bar_time)
+        box supply = box.new(left=momentCTD_HT, top=topBox_HT, right=momentCTD, bgcolor=supplyColor, bottom=open_HT[1], xloc=xloc.bar_time)
         box.set_border_color(supply, supplyBorderColor)
         if textEnable
             box.set_text(supply, timeframeFormatted)
@@ -149,7 +133,7 @@ createSupplyDemandZones(timeframe) =>
         else 
             bottomBox_HT := low_HT[1]
 
-        box demand = box.new(left=time(timeframe)[2], top=open_HT[1], right=momentCTD, bottom=bottomBox_HT, bgcolor=demandColor, xloc=xloc.bar_time)
+        box demand = box.new(left=momentCTD_HT, top=open_HT[1], right=momentCTD, bottom=bottomBox_HT, bgcolor=demandColor, xloc=xloc.bar_time)
         box.set_border_color(demand, demandBorderColor)
         if textEnable
             box.set_text(demand, timeframeFormatted)
@@ -168,23 +152,23 @@ createSupplyDemandZones(timeframe) =>
 //    createSupplyDemandZones('15')
 //if str.tonumber(currentTimeframe) <= 10
 //    createSupplyDemandZones('10')
-//if str.tonumber(timeframe.period) <= 15
+//if str.tonumber(currentTimeframe) <= 15
 //    createSupplyDemandZones('15')
-if display30m and str.tonumber(timeframe.period) <= 30
+if display30m and str.tonumber(currentTimeframe) <= 30
     createSupplyDemandZones('30')
-if display45m and str.tonumber(timeframe.period) <= 45
+if display45m and str.tonumber(currentTimeframe) <= 45
     createSupplyDemandZones('45')
-if display1h and str.tonumber(timeframe.period) <= 60
+if display1h and str.tonumber(currentTimeframe) <= 60
     createSupplyDemandZones('60') 
-if display2h and str.tonumber(timeframe.period) <= 120
+if display2h and str.tonumber(currentTimeframe) <= 120
     createSupplyDemandZones('120')
-if display3h and str.tonumber(timeframe.period) <= 180
+if display3h and str.tonumber(currentTimeframe) <= 180
     createSupplyDemandZones('180')
-if display4h and str.tonumber(timeframe.period) <= 240
+if display4h and str.tonumber(currentTimeframe) <= 240
     createSupplyDemandZones('240')
-if displayD and str.tonumber(timeframe.period) <= 1440
+if displayD and str.tonumber(currentTimeframe) <= 1440
     createSupplyDemandZones('D')
-if displayW and str.tonumber(timeframe.period) <= 10080
+if displayW and str.tonumber(currentTimeframe) <= 10080
     createSupplyDemandZones('W')
 
 // remove broken zones
