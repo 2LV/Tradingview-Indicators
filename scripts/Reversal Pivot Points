@@ -1,0 +1,138 @@
+//@version=5
+indicator("Reversal Pivot Points", shorttitle="Reversal Pivot Points", overlay=true, max_lines_count=500, max_labels_count=500)
+
+//inputs
+pivotTimeframe = input.string("15m", title="Pivot Timeframe", options=["1m", "3m", "5m", "10m", "15m", "30m", "45m", "1h", "2h", "3h", "4h", "D", "W"], group='Pivot Settings', tooltip='The timeframe the script looks for pivots at')
+pivotLeftBars = input.int(defval=3, title="Left Bars Limit", minval=1, group='Pivot Settings', tooltip='High/low price that was not crossed during X bars to the left (past data)')
+pivotRightBars = input.int(defval=3, title="Right Bars Limit", minval=1, group='Pivot Settings', tooltip='High/low price that was not crossed during X bars to the right (future data)')
+
+extensionType = input.string("None", title="Line Extension Type", options=["None", "Left", "Right", "Both"], group='Display Settings')
+offset = input.int(defval=15, title="Line Offset", group='Display Settings', tooltip='How much to offset (in bars) the line and label from the current candle')
+
+lineType = input.string("Solid (─)", title="Line Style", options=["Solid (─)", "Dotted (┈)", "Dashed (╌)", "Arrow Left (←)", "Arrow Right (→)", "Arrows Both (↔)"], group='Line Personalization')
+resistanceEnable = input(true, title="Enable Resistance Pivots", group="Line Personalization")
+resistanceColor = input.color(defval=color.rgb(255, 255, 255), title='Resistance Line Color', group='Line Personalization')
+supportEnable = input(true, title="Enable Support Pivots", group="Line Personalization")
+supportColor = input.color(defval=color.rgb(255, 255, 255), title='Support Line Color', group='Line Personalization')
+
+displayLevel = input.bool(false, title="Display Level", group='Text Settings', tooltip='Whether to or not to display the price of the pivot')
+textColor =input.color(defval=color.rgb(255, 255, 255), title='Text Color', group='Text Settings')
+textSize =input.string("Small", title="Text Size", options=["Auto", "Tiny", "Small", "Normal", "Large", "Huge"], group='Text Settings')
+
+// variables
+
+currentTimeframe = timeframe.period
+
+if currentTimeframe == 'D'
+    currentTimeframe := '1440'
+if currentTimeframe == 'W'
+    currentTimeframe := '10080'
+
+momentCTD = math.round(time(timeframe.period) + (offset * 60000 * str.tonumber(currentTimeframe)))
+
+pivotTimeframe := switch pivotTimeframe
+    '1m' => '1'
+    '3m' => '3'
+    '5m' => '5'
+    '15m' => '16'
+    '30m' => '30'
+    '45m' => '45'
+    '1h' => '60'
+    '2h' => '120'
+    '3h' => '180'
+    '4h' => '240'
+    'D' => 'D'
+    'W' => 'W'
+
+extensionType := switch extensionType
+    "None" => extend.none
+    "Left" => extend.left
+    "Right" => extend.right
+    "Both" => extend.both
+
+lineType := switch lineType
+    "Solid (─)" => line.style_solid
+    "Dotted (┈)" => line.style_dotted
+    "Dashed (╌)" => line.style_dashed
+    "Arrow Left (←)" => line.style_arrow_left
+    "Arrow Right (→)" => line.style_arrow_right
+    "Arrows Both (↔)" => line.style_arrow_both
+
+textSize := switch textSize
+    "Auto" => size.auto
+    "Tiny" => size.tiny
+    "Small" => size.small
+    "Normal" => size.normal
+    "Large"   => size.large
+    "Huge" => size.huge
+
+var line[] resistance_HT = array.new_line()
+var line[] support_HT = array.new_line()
+var label[] resistance_labels = array.new_label()
+var label[] support_labels = array.new_label()
+
+//plotting zones
+
+createPivots(timeframe) =>
+
+    [ph, pl] = request.security(syminfo.tickerid, timeframe, [ta.pivothigh(pivotLeftBars, pivotRightBars), ta.pivotlow(pivotLeftBars, pivotRightBars)], barmerge.gaps_on)
+    momentCTD_HT = time(timeframe)[pivotRightBars+1]
+
+    if not na(ph)
+        line ph_line = line.new(x1=momentCTD_HT, y1=ph, x2=momentCTD, y2=ph, extend=extensionType, xloc=xloc.bar_time, color=resistanceColor, style=lineType)
+        array.push(resistance_HT, ph_line)
+        if displayLevel
+            label ph_label = label.new(x=momentCTD, y=ph, style=label.style_none, text=str.tostring(ph), xloc=xloc.bar_time, textcolor=textColor, size=textSize)
+            array.push(resistance_labels, ph_label)
+    if not na(pl)
+        line pl_line = line.new(x1=momentCTD_HT, y1=pl, x2=momentCTD, y2=pl, extend=extensionType, xloc=xloc.bar_time, color=supportColor, style=lineType)
+        array.push(support_HT, pl_line)
+        if displayLevel
+            label pl_label = label.new(x=momentCTD, y=pl, style=label.style_none, text=str.tostring(pl), xloc=xloc.bar_time, textcolor=textColor, size=textSize)
+            array.push(support_labels, pl_label)
+
+// initiation
+
+createPivots(pivotTimeframe)
+
+// remove broken pivots
+
+i=0
+while i < array.size(resistance_HT) and array.size(resistance_HT) > 0
+    line currentLine = array.get(resistance_HT, i)
+    float breakLevel = line.get_y1(currentLine)
+    if high > breakLevel
+        array.remove(resistance_HT, i)
+        line.delete(currentLine)        
+        if displayLevel and array.size(resistance_labels) > i
+            label currentLineLabel = array.get(resistance_labels, i) 
+            array.remove(resistance_labels, i)
+            label.delete(currentLineLabel)
+        int(na)
+    else
+        line.set_x2(currentLine, momentCTD)
+        if displayLevel and array.size(resistance_labels) > i
+            label currentLineLabel = array.get(resistance_labels, i) 
+            label.set_x(currentLineLabel, momentCTD)
+        i += 1
+        int(na)
+
+i2=0
+while i2 < array.size(support_HT) and array.size(support_HT) > 0
+    line currentLine = array.get(support_HT, i2)
+    float breakLevel = line.get_y1(currentLine)
+    if low < breakLevel 
+        array.remove(support_HT, i2)
+        line.delete(currentLine)
+        if displayLevel and array.size(support_labels) > i2
+            label currentLineLabel = array.get(support_labels, i2) 
+            array.remove(support_labels, i2)
+            label.delete(currentLineLabel)
+        int(na)
+    else
+        line.set_x2(currentLine, momentCTD)
+        if displayLevel and array.size(support_labels) > i2
+            label currentLineLabel = array.get(support_labels, i2) 
+            label.set_x(currentLineLabel, momentCTD)
+        i2 += 1
+        int(na)
