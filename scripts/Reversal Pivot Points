@@ -5,6 +5,7 @@ indicator("Reversal Pivot Points", shorttitle="Reversal Pivot Points", overlay=t
 pivotTimeframe = input.string("15m", title="Pivot Timeframe", options=["1m", "3m", "5m", "10m", "15m", "30m", "45m", "1h", "2h", "3h", "4h", "D", "W"], group='Pivot Settings', tooltip='The timeframe the script looks for pivots at')
 pivotLeftBars = input.int(defval=3, title="Left Bars Limit", minval=1, group='Pivot Settings', tooltip='High/low price that was not crossed during X bars to the left (past data)')
 pivotRightBars = input.int(defval=3, title="Right Bars Limit", minval=1, group='Pivot Settings', tooltip='High/low price that was not crossed during X bars to the right (future data)')
+onCloseUnder = input.bool(defval=false, title="Remove On Close", group='Pivot Settings', tooltip='Only removes pivot if price action closes under the pivot')
 
 extensionType = input.string("None", title="Line Extension Type", options=["None", "Left", "Right", "Both"], group='Display Settings')
 offset = input.int(defval=15, title="Line Offset", group='Display Settings', tooltip='How much to offset (in bars) the line and label from the current candle')
@@ -101,7 +102,7 @@ i=0
 while i < array.size(resistance_HT) and array.size(resistance_HT) > 0
     line currentLine = array.get(resistance_HT, i)
     float breakLevel = line.get_y1(currentLine)
-    if high > breakLevel
+    if (high > breakLevel and not onCloseUnder) or (close > breakLevel and onCloseUnder)
         array.remove(resistance_HT, i)
         line.delete(currentLine)        
         if displayLevel and array.size(resistance_labels) > i
@@ -121,7 +122,7 @@ i2=0
 while i2 < array.size(support_HT) and array.size(support_HT) > 0
     line currentLine = array.get(support_HT, i2)
     float breakLevel = line.get_y1(currentLine)
-    if low < breakLevel 
+    if (low < breakLevel and not onCloseUnder) or (close < breakLevel and onCloseUnder)
         array.remove(support_HT, i2)
         line.delete(currentLine)
         if displayLevel and array.size(support_labels) > i2
