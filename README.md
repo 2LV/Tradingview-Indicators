@@ -20,7 +20,7 @@ This indicator aims to identify price levels where price action has quickly reve
 6. Line Type: The style of line when plotted. Solid (─), dotted (┈), dashed (╌), arrow left (←), arrow right (→), arrows both (↔)
 7. Display Level: Whether to or not to display the price of the pivot
 
-![image](https://github.com/8pz/tradingview-indicators/assets/70970973/c09b1ff3-67fe-4092-a3f6-1182ca1ac29a)
+![image](https://github.com/8pz/Tradingview-Indicators/assets/70970973/69d7abce-d2d2-46d1-9266-22ad318cbbc1)
 
 ## [Multiple Moving Average](https://github.com/8pz/tradingview-indicators/blob/main/scripts/Multiple%20Moving%20Averages) 
 A simple script to plot 5 (SMA, EMA, WMA, HMA, RMA) different moving averages and VWAP.
