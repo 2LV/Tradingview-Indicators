@@ -35,7 +35,8 @@ pivotTimeframe := switch pivotTimeframe
     '1m' => '1'
     '3m' => '3'
     '5m' => '5'
-    '15m' => '16'
+    '10m' => '10'
+    '15m' => '15'
     '30m' => '30'
     '45m' => '45'
     '1h' => '60'
@@ -72,14 +73,14 @@ var line[] support_HT = array.new_line()
 var label[] resistance_labels = array.new_label()
 var label[] support_labels = array.new_label()
 
-//plotting pivots
+//plotting zones
 
 createPivots(timeframe) =>
 
     [ph, pl] = request.security(syminfo.tickerid, timeframe, [ta.pivothigh(pivotLeftBars, pivotRightBars), ta.pivotlow(pivotLeftBars, pivotRightBars)], gaps=barmerge.gaps_on, lookahead=barmerge.lookahead_on)
     momentCTD_HT = time(timeframe)[pivotRightBars+1]
 
-    if not na(ph)
+    if not na(ph) and barstate.isconfirmed[1]
         line ph_line = line.new(x1=momentCTD_HT, y1=ph, x2=momentCTD, y2=ph, extend=extensionType, xloc=xloc.bar_time, color=resistanceColor, style=lineType)
         array.push(resistance_HT, ph_line)
         if displayLevel
