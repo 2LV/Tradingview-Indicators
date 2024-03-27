@@ -1,6 +1,6 @@
 [Setup](https://github.com/8pz/tradingview-indicators?tab=readme-ov-file#setup) • [Disclaimer](https://github.com/8pz/tradingview-indicators?tab=readme-ov-file#disclaimer) • [License](https://github.com/8pz/tradingview-indicators?tab=readme-ov-file#license)
 
-## [Institutional Supply and Demand Zones](https://github.com/8pz/tradingview-indicators/blob/main/scripts/supply%20and%20demand%20zones)
+## [Institutional Supply and Demand Zones](https://github.com/8pz/Tradingview-Indicators/blob/main/scripts/Institutional%20Supply%20%26%20Demand%20Zones)
 This indicator aims to identify price levels where institutional investors have positioned their buy or sell orders. These buy orders establish "demand zones," while sell orders create "supply zones." Identifying these zones enables us to anticipate potential reversals in price trends, allowing us to profitably engage in these significant market movements alongside major institutions. These zones are formed when price action goes from balanced to imbalanced. These zones are based on orders. Unlike standard support and resistance levels, when price breaks below a demand zone or above a supply zone, these zones disappear from the chart. Supply is formed by a green candle followed by a major red candle that is at least double the size of previous green candle. The zone is then charted from the open of the green candle to the highest point in the candle. Vice versa for a demand zone (red candle into green candle). Add it to your chart [here](https://www.tradingview.com/script/eAO9uAu5-Institutional-Supply-and-Demand-Zones/)
 
 These zones are traded by:
@@ -10,7 +10,7 @@ These zones are traded by:
 ![image](https://github.com/8pz/tradingview-indicators/assets/70970973/371d2a81-8004-4e53-b89f-de12bdaf6bf2)
 
 ## [Reversal Pivot Points](https://github.com/8pz/tradingview-indicators/blob/main/scripts/Reversal%20Pivot%20Points) 
-This indicator aims to identify price levels where price action has quickly reversed from. These "pivots" establish major levels where major liquidity is located. Unlike standard support and resistance levels, when price breaks below or above a pivot, these pivots disappear from the chart. Comes with various customization features built to fit all. Add it to your chart [here]()
+This indicator aims to identify price levels where price action has quickly reversed from. These "pivots" establish major levels where major liquidity is located. Unlike standard support and resistance levels, when price breaks below or above a pivot, these pivots disappear from the chart. Comes with various customization features built to fit all.
 
 1. Pivot Timeframe: Identify and plot pivots from one specific timeframe and see it from all lower timeframes
 2. Pivot left/right bars: A feature aimed to limit pivots identification
