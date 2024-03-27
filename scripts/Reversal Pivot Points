@@ -72,11 +72,11 @@ var line[] support_HT = array.new_line()
 var label[] resistance_labels = array.new_label()
 var label[] support_labels = array.new_label()
 
-//plotting zones
+//plotting pivots
 
 createPivots(timeframe) =>
 
-    [ph, pl] = request.security(syminfo.tickerid, timeframe, [ta.pivothigh(pivotLeftBars, pivotRightBars), ta.pivotlow(pivotLeftBars, pivotRightBars)], barmerge.gaps_on)
+    [ph, pl] = request.security(syminfo.tickerid, timeframe, [ta.pivothigh(pivotLeftBars, pivotRightBars), ta.pivotlow(pivotLeftBars, pivotRightBars)], gaps=barmerge.gaps_on, lookahead=barmerge.lookahead_on)
     momentCTD_HT = time(timeframe)[pivotRightBars+1]
 
     if not na(ph)
@@ -85,7 +85,7 @@ createPivots(timeframe) =>
         if displayLevel
             label ph_label = label.new(x=momentCTD, y=ph, style=label.style_none, text=str.tostring(ph), xloc=xloc.bar_time, textcolor=textColor, size=textSize)
             array.push(resistance_labels, ph_label)
-    if not na(pl)
+    if not na(pl) and barstate.isconfirmed[1]
         line pl_line = line.new(x1=momentCTD_HT, y1=pl, x2=momentCTD, y2=pl, extend=extensionType, xloc=xloc.bar_time, color=supportColor, style=lineType)
         array.push(support_HT, pl_line)
         if displayLevel
