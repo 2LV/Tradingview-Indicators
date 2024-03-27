@@ -63,13 +63,6 @@ supplyValign := switch supplyValign
     'Center' => text.align_center
     'Top' => text.align_top
 
-if supplyValign == 'Bottom'
-    supplyValign := text.align_bottom
-if supplyValign == 'Center'
-    supplyValign := text.align_center
-if supplyValign == 'Top'
-    supplyValign := text.align_top
-
 demandValign := switch demandValign
     'Bottom'=> text.align_bottom
     'Center' => text.align_center
