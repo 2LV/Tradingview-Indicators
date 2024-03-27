@@ -10,7 +10,7 @@ These zones are traded by:
 ![image](https://github.com/8pz/tradingview-indicators/assets/70970973/371d2a81-8004-4e53-b89f-de12bdaf6bf2)
 
 ## [Reversal Pivot Points](https://github.com/8pz/tradingview-indicators/blob/main/scripts/Reversal%20Pivot%20Points) 
-This indicator aims to identify price levels where price action has quickly reversed from. These "pivots" establish major levels where major liquidity is located. Unlike standard support and resistance levels, when price breaks below or above a pivot, these pivots disappear from the chart. Comes with various customization features built to fit al. Add it to your chart [here](https://www.tradingview.com/script/eAO9uAu5-Institutional-Supply-and-Demand-Zones/)
+This indicator aims to identify price levels where price action has quickly reversed from. These "pivots" establish major levels where major liquidity is located. Unlike standard support and resistance levels, when price breaks below or above a pivot, these pivots disappear from the chart. Comes with various customization features built to fit all. Add it to your chart [here](https://www.tradingview.com/script/eAO9uAu5-Institutional-Supply-and-Demand-Zones/)
 
 ![image](https://github.com/8pz/tradingview-indicators/assets/70970973/c09b1ff3-67fe-4092-a3f6-1182ca1ac29a)
 
