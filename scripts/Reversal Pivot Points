@@ -73,7 +73,7 @@ var line[] support_HT = array.new_line()
 var label[] resistance_labels = array.new_label()
 var label[] support_labels = array.new_label()
 
-//plotting zones
+//plotting pivots
 
 createPivots(timeframe) =>
 
