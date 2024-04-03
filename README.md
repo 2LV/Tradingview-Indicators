@@ -26,7 +26,7 @@ This indicator aims to identify price levels where price action has quickly reve
 5. Offset: How much to offset (in bars) the line and label from the current candle
 6. Line Type: The style of line when plotted. Solid (─), dotted (┈), dashed (╌), arrow left (←), arrow right (→), arrows both (↔)
 7. Display Level: Whether to or not to display the price of the pivot
-8. Display Perfect Level (NEW): Whether to or not to display levels where price perfectly rejected off of
+8. Display Perfect Level: Whether to or not to display levels where price perfectly rejected off of
 
 ### How to trade
 
