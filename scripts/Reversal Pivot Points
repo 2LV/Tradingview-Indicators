@@ -6,6 +6,7 @@ pivotTimeframe = input.string("15m", title="Pivot Timeframe", options=["1m", "3m
 pivotLeftBars = input.int(defval=3, title="Left Bars Limit", minval=1, group='Pivot Settings', tooltip='High/low price that was not crossed during X bars to the left (past data)')
 pivotRightBars = input.int(defval=3, title="Right Bars Limit", minval=1, group='Pivot Settings', tooltip='High/low price that was not crossed during X bars to the right (future data)')
 onCloseUnder = input.bool(defval=false, title="Remove On Close", group='Pivot Settings', tooltip='Only removes pivot if price action closes under the pivot')
+displayPerfectLevel = input.bool(defval=false, title="Display Perfect Level", group='Pivot Settings', tooltip='Labels a level if price action perfectly bounces off of it (labeled as PDB/PDT)')
 
 extensionType = input.string("None", title="Line Extension Type", options=["None", "Left", "Right", "Both"], group='Display Settings')
 offset = input.int(defval=15, title="Line Offset", group='Display Settings', tooltip='How much to offset (in bars) the line and label from the current candle')
@@ -72,23 +73,31 @@ var line[] resistance_HT = array.new_line()
 var line[] support_HT = array.new_line()
 var label[] resistance_labels = array.new_label()
 var label[] support_labels = array.new_label()
+var float[] resistance_levels = array.new_float()
+var float[] support_levels = array.new_float()
 
-//plotting pivots
+//plotting zones
 
 createPivots(timeframe) =>
 
     [ph, pl] = request.security(syminfo.tickerid, timeframe, [ta.pivothigh(pivotLeftBars, pivotRightBars), ta.pivotlow(pivotLeftBars, pivotRightBars)], gaps=barmerge.gaps_on, lookahead=barmerge.lookahead_on)
     momentCTD_HT = time(timeframe)[pivotRightBars+1]
 
-    if not na(ph) and barstate.isconfirmed[1]
+    // resistance pivots
+
+    if not na(ph) and barstate.isconfirmed[1] and not array.includes(resistance_levels, ph)
         line ph_line = line.new(x1=momentCTD_HT, y1=ph, x2=momentCTD, y2=ph, extend=extensionType, xloc=xloc.bar_time, color=resistanceColor, style=lineType)
         array.push(resistance_HT, ph_line)
+        array.push(resistance_levels, ph)
         if displayLevel
             label ph_label = label.new(x=momentCTD, y=ph, style=label.style_none, text=str.tostring(ph), xloc=xloc.bar_time, textcolor=textColor, size=textSize)
-            array.push(resistance_labels, ph_label)
-    if not na(pl) and barstate.isconfirmed[1]
+            array.push(resistance_labels, ph_label)            
+    // support pivots
+
+    if not na(pl) and barstate.isconfirmed[1] and not array.includes(support_levels, pl)
         line pl_line = line.new(x1=momentCTD_HT, y1=pl, x2=momentCTD, y2=pl, extend=extensionType, xloc=xloc.bar_time, color=supportColor, style=lineType)
         array.push(support_HT, pl_line)
+        array.push(support_levels, pl)
         if displayLevel
             label pl_label = label.new(x=momentCTD, y=pl, style=label.style_none, text=str.tostring(pl), xloc=xloc.bar_time, textcolor=textColor, size=textSize)
             array.push(support_labels, pl_label)
@@ -105,11 +114,21 @@ while i < array.size(resistance_HT) and array.size(resistance_HT) > 0
     float breakLevel = line.get_y1(currentLine)
     if (high > breakLevel and not onCloseUnder) or (close > breakLevel and onCloseUnder)
         array.remove(resistance_HT, i)
+        if array.size(resistance_levels) > i
+            array.remove(resistance_levels, i)
         line.delete(currentLine)        
         if displayLevel and array.size(resistance_labels) > i
             label currentLineLabel = array.get(resistance_labels, i) 
             array.remove(resistance_labels, i)
             label.delete(currentLineLabel)
+        int(na)
+    else if high == breakLevel and displayPerfectLevel and displayLevel and array.size(resistance_labels) > i
+        label currentLineLabel = array.get(resistance_labels, i) 
+        line.set_x2(currentLine, momentCTD)
+        label.set_x(currentLineLabel, momentCTD)
+        if not str.contains(label.get_text(currentLineLabel), " PDT")
+            label.set_text(currentLineLabel, str.tostring(high) + " PDT")
+        i += 1
         int(na)
     else
         line.set_x2(currentLine, momentCTD)
@@ -125,11 +144,21 @@ while i2 < array.size(support_HT) and array.size(support_HT) > 0
     float breakLevel = line.get_y1(currentLine)
     if (low < breakLevel and not onCloseUnder) or (close < breakLevel and onCloseUnder)
         array.remove(support_HT, i2)
+        if array.size(support_levels) > i2
+            array.remove(support_levels, i2)
         line.delete(currentLine)
         if displayLevel and array.size(support_labels) > i2
             label currentLineLabel = array.get(support_labels, i2) 
             array.remove(support_labels, i2)
             label.delete(currentLineLabel)
+        int(na)
+    else if low == breakLevel and displayPerfectLevel and displayLevel and array.size(support_labels) > i2
+        label currentLineLabel = array.get(support_labels, i2)
+        line.set_x2(currentLine, momentCTD)
+        label.set_x(currentLineLabel, momentCTD)
+        if not str.contains(label.get_text(currentLineLabel), " PDB")
+            label.set_text(currentLineLabel, str.tostring(low) + " PDB")
+        i2 += 1
         int(na)
     else
         line.set_x2(currentLine, momentCTD)
