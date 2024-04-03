@@ -51,6 +51,6 @@ The project is licensed under: **CC-NY-BC**
 
 Commercial reuse is strictly prohibited
 
-- discord @ 123781023
+- discord @ onasn
 - tele @ [onasn](https://t.me/onasn)
 - email @ 123781023@proton.me
