@@ -20,10 +20,12 @@ This indicator aims to identify price levels where price action has quickly reve
 5. Offset: How much to offset (in bars) the line and label from the current candle
 6. Line Type: The style of line when plotted. Solid (─), dotted (┈), dashed (╌), arrow left (←), arrow right (→), arrows both (↔)
 7. Display Level: Whether to or not to display the price of the pivot
+8. Display Perfect Level (NEW): Whether to or not to display levels where price perfectly rejected off of
 
 ### How to trade
 
-Pivots can be traded to or from. The stock market (market makers) will tend to "chase" liquidity in order to fill orders at better averages. This allows us retail traders to to participate alongside these moves to these pivots. Once price action hits a pivot, it can do two things: break the pivot and continue or bounce off it. We can participate alongside these bounces after confirmation of a reversal (doji, volume, etc). These bounce plays are high risk as it's generally 50-50, but the risk to reward is typically also very high, making them very valuable to take. 
+1. Pivots can be traded to or from. The stock market (market makers) will tend to "chase" liquidity in order to fill orders at better averages. This allows us retail traders to to participate alongside these moves to these pivots. Once price action hits a pivot, it can do two things: break the pivot and continue or bounce off it. We can participate alongside these bounces after confirmation of a reversal (doji, volume, etc). These bounce plays are high risk as it's generally 50-50, but the risk to reward is typically also very high, making them very valuable to take.
+2. Typically, the market is a fluid environment and should be "natural," so perfect things (manmade and filled with liquidity) shouldn't occur. With this knowledge, we can expect these "PDT/PDB" to break as they are not natural and have heavy liquidity on and above/below them. We can trade to these levels and expect them to break if price action comes near them again. 
 
 ![image](https://github.com/8pz/Tradingview-Indicators/assets/70970973/69d7abce-d2d2-46d1-9266-22ad318cbbc1)
 
