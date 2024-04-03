@@ -3,6 +3,12 @@
 ## [Institutional Supply & Demand Zones](https://github.com/8pz/Tradingview-Indicators/blob/main/scripts/Institutional%20Supply%20%26%20Demand%20Zones)
 This indicator aims to identify price levels where institutional investors have positioned their buy or sell orders. These buy orders establish "demand zones," while sell orders create "supply zones." Identifying these zones enables us to anticipate potential reversals in price trends, allowing us to profitably engage in these significant market movements alongside major institutions. These zones are formed when price action goes from balanced to imbalanced. These zones are based on orders. Unlike standard support and resistance levels, when price breaks below a demand zone or above a supply zone, these zones disappear from the chart. Supply is formed by a green candle followed by a major red candle that is at least double the size of previous green candle. The zone is then charted from the open of the green candle to the highest point in the candle. Vice versa for a demand zone (red candle into green candle). Add it to your chart [here](https://www.tradingview.com/script/eAO9uAu5-Institutional-Supply-and-Demand-Zones/)
 
+### Features
+
+1. Zone Difference Scale: The scale of how much a candle needs to be larger than a previous to be considered a zone
+2. Zone Extension: How much to extend zones to the right of latest bar in bars
+3. Display Text/Display High/Low: Whether to or not to display the tops and bottoms of a zone as text (ie. Top: 4000.00 Bottom: 3900.00)
+
 ### How to trade
 1. Look for a volume spike in a zone
 2. A trend change out of the zone (trendline break, ChoCh, etc)
@@ -27,7 +33,7 @@ This indicator aims to identify price levels where price action has quickly reve
 1. Pivots can be traded to or from. The stock market (market makers) will tend to "chase" liquidity in order to fill orders at better averages. This allows us retail traders to to participate alongside these moves to these pivots. Once price action hits a pivot, it can do two things: break the pivot and continue or bounce off it. We can participate alongside these bounces after confirmation of a reversal (doji, volume, etc). These bounce plays are high risk as it's generally 50-50, but the risk to reward is typically also very high, making them very valuable to take.
 2. Typically, the market is a fluid environment and should be "natural," so perfect things (manmade and filled with liquidity) shouldn't occur. With this knowledge, we can expect these "PDT/PDB" to break as they are not natural and have heavy liquidity on and above/below them. We can trade to these levels and expect them to break if price action comes near them again. 
 
-![image](https://github.com/8pz/Tradingview-Indicators/assets/70970973/69d7abce-d2d2-46d1-9266-22ad318cbbc1)
+![image](https://github.com/8pz/Tradingview-Indicators/assets/70970973/a725aad4-3ea7-44a5-bee8-c7fe473af69b)
 
 ## [Multiple Moving Average](https://github.com/8pz/tradingview-indicators/blob/main/scripts/Multiple%20Moving%20Averages) 
 A simple script to plot 5 (SMA, EMA, WMA, HMA, RMA) different moving averages and VWAP.
