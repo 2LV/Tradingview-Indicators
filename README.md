@@ -61,4 +61,4 @@ Commercial reuse is strictly prohibited
 
 - discord @ onasn
 - tele @ [onasn](https://t.me/onasn)
-- email @ 123781023@proton.me
+- email @ onasn@proton.me
