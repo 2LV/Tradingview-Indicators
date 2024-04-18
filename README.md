@@ -13,7 +13,7 @@ This indicator aims to identify price levels where institutional investors have 
 1. Look for a volume spike in a zone
 2. A trend change out of the zone (trendline break, ChoCh, etc)
 
-![image](https://github.com/8pz/tradingview-indicators/assets/70970973/371d2a81-8004-4e53-b89f-de12bdaf6bf2)
+![image](https://github.com/2LV/Tradingview-Indicators/assets/70970973/3b0c8719-e79e-4677-999f-8f4400868a15)
 
 ## [Reversal Pivot Points](https://github.com/8pz/tradingview-indicators/blob/main/scripts/Reversal%20Pivot%20Points) 
 This indicator aims to identify price levels where price action has quickly reversed from. These "pivots" establish major levels where major liquidity is located. Unlike standard support and resistance levels, when price breaks below or above a pivot, these pivots disappear from the chart. Comes with various customization features built to fit all.
@@ -34,12 +34,12 @@ This indicator aims to identify price levels where price action has quickly reve
 1. Pivots can be traded to or from. The stock market (market makers) will tend to "chase" liquidity in order to fill orders at better averages. This allows us retail traders to to participate alongside these moves to these pivots. Once price action hits a pivot, it can do two things: break the pivot and continue or bounce off it. We can participate alongside these bounces after confirmation of a reversal (doji, volume, etc). These bounce plays are high risk as it's generally 50-50, but the risk to reward is typically also very high, making them very valuable to take.
 2. Typically, the market is a fluid environment and should be "natural," so perfect things (manmade and filled with liquidity) shouldn't occur. With this knowledge, we can expect these "PDT/PDB" to break as they are not natural and have heavy liquidity on and above/below them. We can trade to these levels and expect them to break if price action comes near them again. 
 
-![image](https://github.com/8pz/Tradingview-Indicators/assets/70970973/a725aad4-3ea7-44a5-bee8-c7fe473af69b)
+![image](https://github.com/2LV/Tradingview-Indicators/assets/70970973/729d39e7-c9bb-4797-a8da-99d047c7104a)
 
 ## [Multiple Moving Average](https://github.com/8pz/tradingview-indicators/blob/main/scripts/Multiple%20Moving%20Averages) 
 A simple script to plot 5 (SMA, EMA, WMA, HMA, RMA) different moving averages and VWAP.
 
-![image](https://github.com/8pz/Tradingview-Indicators/assets/70970973/826e03db-7e1b-4a49-a129-f1194379a82e)
+![image](https://github.com/2LV/Tradingview-Indicators/assets/70970973/30bdda4a-4369-4510-b472-b083f6ece1d8)
 
 # Setup
 
