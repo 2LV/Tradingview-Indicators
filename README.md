@@ -23,10 +23,11 @@ This indicator aims to identify price levels where price action has quickly reve
 2. Pivot left/right bars: A feature aimed to limit pivots identification
 3. Extension Type: The extension of the line. None - extends line to current time, left - only extends line to the left, right - only extends line to the right, both - extends line both directions
 4. Remove On Close: Feature to only remove pivots once price close under it
-5. Offset: How much to offset (in bars) the line and label from the current candle
-6. Line Type: The style of line when plotted. Solid (─), dotted (┈), dashed (╌), arrow left (←), arrow right (→), arrows both (↔)
-7. Display Level: Whether to or not to display the price of the pivot
-8. Display Perfect Level: Whether to or not to display levels where price perfectly rejected off of
+5. Remove On Close Timeframe: The timeframe the script uses to determine if the candle closed under the level
+6. Offset: How much to offset (in bars) the line and label from the current candle
+7. Line Type: The style of line when plotted. Solid (─), dotted (┈), dashed (╌), arrow left (←), arrow right (→), arrows both (↔)
+8. Display Level: Whether to or not to display the price of the pivot
+9. Display Perfect Level: Whether to or not to display levels where price perfectly rejected off of
 
 ### How to trade
 
