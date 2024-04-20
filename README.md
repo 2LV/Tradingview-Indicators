@@ -52,7 +52,7 @@ A simple script to plot 5 (SMA, EMA, WMA, HMA, RMA) different moving averages an
 
 # Disclaimer
 
-I do not provide financial advice - my indicator and strategies are intended to provide only source code for anyone interested in improving their trading. 
+The trading strategies and indicators shared here are for educational purposes only. They do not constitute financial advice or recommendations. Trading carries risks, and past performance is not indicative of future results. Traders should exercise caution and conduct their own research before making any trading decisions.
 
 # License
 
