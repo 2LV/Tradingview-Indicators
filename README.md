@@ -37,7 +37,7 @@ This indicator aims to identify price levels where price action has quickly reve
 ![image](https://github.com/2LV/Tradingview-Indicators/assets/70970973/729d39e7-c9bb-4797-a8da-99d047c7104a)
 
 ## [Multiple Moving Average](https://github.com/8pz/tradingview-indicators/blob/main/scripts/Multiple%20Moving%20Averages) 
-A simple script to plot 5 (SMA, EMA, WMA, HMA, RMA) different moving averages and VWAP.
+A simple indicator to plot 5 different types of moving averages (SMA, EMA, WMA, HMA, RMA) and VWAP in different colors.
 
 ![image](https://github.com/2LV/Tradingview-Indicators/assets/70970973/30bdda4a-4369-4510-b472-b083f6ece1d8)
 
