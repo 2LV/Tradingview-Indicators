@@ -61,5 +61,5 @@ The project is licensed under: **CC-NY-BC**
 Commercial reuse is strictly prohibited
 
 - discord @ nqmini
-- tele @ [nqmicro](https://t.me/nqmicro)
+- telegram @ [nqmicro](https://t.me/nqmicro)
 - email @ 123781023@proton.me
