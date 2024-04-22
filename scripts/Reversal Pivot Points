@@ -83,7 +83,7 @@ textSize := switch textSize
     "Large"   => size.large
     "Huge" => size.huge
 
-[OCTF_Close] = request.security(syminfo.tickerid, onCloseTimeframe, [close])
+[OCTF_Close] = request.security(syminfo.tickerid, onCloseTimeframe, [close], lookahead=barmerge.lookahead_on)
 momentCTD = math.round(time(timeframe.period) + (offset * 60000 * str.tonumber(currentTimeframe)))
 var line[] resistance_HT = array.new_line()
 var line[] support_HT = array.new_line()
@@ -96,7 +96,7 @@ var float[] support_levels = array.new_float()
 
 createPivots(timeframe) =>
 
-    [ph, pl] = request.security(syminfo.tickerid, timeframe, [math.round_to_mintick(ta.pivothigh(pivotLeftBars, pivotRightBars)), math.round_to_mintick(ta.pivotlow(pivotLeftBars, pivotRightBars))], gaps=barmerge.gaps_on)
+    [ph, pl] = request.security(syminfo.tickerid, timeframe, [math.round_to_mintick(ta.pivothigh(pivotLeftBars, pivotRightBars)), math.round_to_mintick(ta.pivotlow(pivotLeftBars, pivotRightBars))], gaps=barmerge.gaps_on, lookahead=barmerge.lookahead_on)
     momentCTD_HT = time(timeframe)[pivotRightBars+1]
 
     // resistance pivots
