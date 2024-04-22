@@ -20,21 +20,23 @@ This indicator aims to identify price levels where price action has quickly reve
 
 ### Features
 1. Pivot Timeframe: Identify and plot pivots from one specific timeframe and see it from all lower timeframes
-2. Pivot left/right bars: A feature aimed to limit pivots identification
-3. Extension Type: The extension of the line. None - extends line to current time, left - only extends line to the left, right - only extends line to the right, both - extends line both directions
-4. Remove On Close: Feature to only remove pivots once price close under it
-5. Remove On Close Timeframe: The timeframe the script uses to determine if the candle closed under the level
-6. Offset: How much to offset (in bars) the line and label from the current candle
-7. Line Type: The style of line when plotted. Solid (─), dotted (┈), dashed (╌), arrow left (←), arrow right (→), arrows both (↔)
-8. Display Level: Whether to or not to display the price of the pivot
-9. Display Perfect Level: Whether to or not to display levels where price perfectly rejected off of
+2. Pivot left/right bar limit: A feature aimed at preventing false pivots identification
+3. Remove On Close (ROC): Feature to only remove pivots once price close under it
+4. ROC Timeframe: The timeframe the script uses to determine if the candle closed under the level
+5. Wait For Close: Will only remove the pivot after the current candle closes
+6. Line Extension Type: The extension of the line. None - extends line to current time, left - only extends line to the left, right - only extends line to the right, both - extends line both directions
+7. Line Offset: How much to offset (in bars) the line and label from the current candle
+8. Line Type: The style of line when plotted. Solid (─), dotted (┈), dashed (╌), arrow left (←), arrow right (→), arrows both (↔)
+9. Display Level: Whether to or not to display the price of the pivot
+10. Display Perfect Level: Whether to or not to display levels where price perfectly rejected off of
+11. Alerts: Creates an alert when a level has been crossed
 
 ### How to trade
 
 1. Pivots can be traded to or from. The stock market (market makers) will tend to "chase" liquidity in order to fill orders at better averages. This allows us retail traders to to participate alongside these moves to these pivots. Once price action hits a pivot, it can do two things: break the pivot and continue or bounce off it. We can participate alongside these bounces after confirmation of a reversal (doji, volume, etc). These bounce plays are high risk as it's generally 50-50, but the risk to reward is typically also very high, making them very valuable to take.
 2. Typically, the market is a fluid environment and should be "natural," so perfect things (manmade and filled with liquidity) shouldn't occur. With this knowledge, we can expect these "PDT/PDB" to break as they are not natural and have heavy liquidity on and above/below them. We can trade to these levels and expect them to break if price action comes near them again. 
 
-![image](https://github.com/2LV/Tradingview-Indicators/assets/70970973/729d39e7-c9bb-4797-a8da-99d047c7104a)
+![image](https://github.com/2LV/Tradingview-Indicators/assets/70970973/8f823bf0-69f7-4c27-a726-967af4ca3bfd)
 
 ## [Multiple Moving Average](https://github.com/8pz/tradingview-indicators/blob/main/scripts/Multiple%20Moving%20Averages) 
 A simple indicator to plot 5 different types of moving averages (SMA, EMA, WMA, HMA, RMA) and VWAP in different colors.
