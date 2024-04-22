@@ -7,7 +7,8 @@ This indicator aims to identify price levels where institutional investors have 
 
 1. Zone Difference Scale: The scale of how much a candle needs to be larger than a previous to be considered a zone
 2. Zone Extension: How much to extend zones to the right of latest bar in bars
-3. Display Text/Display High/Low: Whether to or not to display the tops and bottoms of a zone as text (ie. Top: 4000.00 Bottom: 3900.00)
+3. Display Lower Timeframe Zones: A feature to attempt to display zones that are formed on a lower timeframe than the current one (ex. 30m zone on 4h chart)
+4. Display Text/Display High/Low: Whether to or not to display the tops and bottoms of a zone as text (ie. Top: 4000.00 Bottom: 3900.00)
 
 ### How to trade
 1. Look for a volume spike in a zone
