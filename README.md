@@ -17,7 +17,7 @@ This indicator aims to identify price levels where institutional investors have 
 ![image](https://github.com/2LV/Tradingview-Indicators/assets/70970973/3b0c8719-e79e-4677-999f-8f4400868a15)
 
 ## [Reversal Pivot Points](https://github.com/8pz/tradingview-indicators/blob/main/scripts/Reversal%20Pivot%20Points) 
-This indicator aims to identify price levels where price action has quickly reversed from. These "pivots" establish major levels where major liquidity is located. Unlike standard support and resistance levels, when price breaks below or above a pivot, these pivots disappear from the chart. Comes with various customization features built to fit all. Add it to your chart [https://www.tradingview.com/script/OGeG7pyt-Reversal-Pivot-Points/](https://www.tradingview.com/script/OGeG7pyt-Reversal-Pivot-Points/)
+This indicator aims to identify price levels where price action has quickly reversed from. These "pivots" establish major levels where major liquidity is located. Unlike standard support and resistance levels, when price breaks below or above a pivot, these pivots disappear from the chart. Comes with various customization features built to fit all. Add it to your chart [here](https://www.tradingview.com/script/OGeG7pyt-Reversal-Pivot-Points/)
 
 ### Features
 1. Pivot Timeframe: Identify and plot pivots from one specific timeframe and see it from all lower timeframes
