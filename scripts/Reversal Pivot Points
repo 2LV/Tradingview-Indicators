@@ -83,7 +83,7 @@ textSize := switch textSize
     "Large"   => size.large
     "Huge" => size.huge
 
-[OCTF_Close] = request.security(syminfo.tickerid, onCloseTimeframe, [close], lookahead=barmerge.lookahead_on)
+[OCTF_Close] = request.security(syminfo.tickerid, onCloseTimeframe, [close[1]])
 momentCTD = math.round(time(timeframe.period) + (offset * 60000 * str.tonumber(currentTimeframe)))
 var line[] resistance_HT = array.new_line()
 var line[] support_HT = array.new_line()
@@ -92,35 +92,31 @@ var label[] support_labels = array.new_label()
 var float[] resistance_levels = array.new_float()
 var float[] support_levels = array.new_float()
 
-//plotting zones
+// create pivots
 
-createPivots(timeframe) =>
+[ph, pl] = request.security(syminfo.tickerid, pivotTimeframe, [math.round_to_mintick(ta.pivothigh(pivotLeftBars, pivotRightBars)), math.round_to_mintick(ta.pivotlow(pivotLeftBars, pivotRightBars))], gaps=barmerge.gaps_on)
+momentCTD_HT = time(pivotTimeframe)[pivotRightBars]
 
-    [ph, pl] = request.security(syminfo.tickerid, timeframe, [math.round_to_mintick(ta.pivothigh(pivotLeftBars, pivotRightBars)), math.round_to_mintick(ta.pivotlow(pivotLeftBars, pivotRightBars))], gaps=barmerge.gaps_on, lookahead=barmerge.lookahead_on)
-    momentCTD_HT = time(timeframe)[pivotRightBars+1]
+// resistance pivots
 
-    // resistance pivots
+if not na(ph) and not array.includes(resistance_levels, ph)
+    line ph_line = line.new(x1=momentCTD_HT, y1=ph, x2=momentCTD, y2=ph, extend=extensionType, xloc=xloc.bar_time, color=resistanceColor, style=lineType)
+    array.push(resistance_HT, ph_line)
+    array.push(resistance_levels, ph)
+    if displayLevel
+        label ph_label = label.new(x=momentCTD, y=ph, style=label.style_none, text=str.tostring(ph), xloc=xloc.bar_time, textcolor=textColor, size=textSize)
+        array.push(resistance_labels, ph_label)            
+        
+// support pivots
 
-    if not na(ph) and barstate.isconfirmed[1] and not array.includes(resistance_levels, ph)
-        line ph_line = line.new(x1=momentCTD_HT, y1=ph, x2=momentCTD, y2=ph, extend=extensionType, xloc=xloc.bar_time, color=resistanceColor, style=lineType)
-        array.push(resistance_HT, ph_line)
-        array.push(resistance_levels, ph)
-        if displayLevel
-            label ph_label = label.new(x=momentCTD, y=ph, style=label.style_none, text=str.tostring(ph), xloc=xloc.bar_time, textcolor=textColor, size=textSize)
-            array.push(resistance_labels, ph_label)            
-    // support pivots
+if not na(pl) and not array.includes(support_levels, pl)
+    line pl_line = line.new(x1=momentCTD_HT, y1=pl, x2=momentCTD, y2=pl, extend=extensionType, xloc=xloc.bar_time, color=supportColor, style=lineType)
+    array.push(support_HT, pl_line)
+    array.push(support_levels, pl)
+    if displayLevel
+        label pl_label = label.new(x=momentCTD, y=pl, style=label.style_none, text=str.tostring(pl), xloc=xloc.bar_time, textcolor=textColor, size=textSize)
+        array.push(support_labels, pl_label)
 
-    if not na(pl) and barstate.isconfirmed[1] and not array.includes(support_levels, pl)
-        line pl_line = line.new(x1=momentCTD_HT, y1=pl, x2=momentCTD, y2=pl, extend=extensionType, xloc=xloc.bar_time, color=supportColor, style=lineType)
-        array.push(support_HT, pl_line)
-        array.push(support_levels, pl)
-        if displayLevel
-            label pl_label = label.new(x=momentCTD, y=pl, style=label.style_none, text=str.tostring(pl), xloc=xloc.bar_time, textcolor=textColor, size=textSize)
-            array.push(support_labels, pl_label)
-
-// initiation
-
-createPivots(pivotTimeframe)
 
 // remove broken pivots
 
