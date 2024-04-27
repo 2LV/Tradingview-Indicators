@@ -1,5 +1,5 @@
 //@version=5
-indicator("Institutional Supply & Demand Zones", shorttitle="Institutional Supply & Demand Zones", overlay=true, max_boxes_count = 500)
+indicator("Institutional Supply & Demand Zones", overlay=true, max_boxes_count = 500)
 
 //inputs
 candleDifferenceScale = input.float(defval = 1.8, minval = 1, title = 'Zone Difference Scale', tooltip = 'The scale of how much a candle needs to be larger than a previous to be considered a zone (minimum value 1.0, default 1.8)', group = 'Zone Settings')
