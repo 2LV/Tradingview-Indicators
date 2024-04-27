@@ -59,9 +59,9 @@ The trading strategies and indicators shared here are for educational purposes o
 
 # License
 
-The project is licensed under: **CC-NY-BC**
+The project is licensed under: [**CC-NY-BC**](http://creativecommons.org/licenses/by-nc/4.0/)
 
-Commercial reuse is strictly prohibited
+Commercial reuse is **strictly prohibited**
 
 - discord @ nqmini
 - telegram @ [nqmicro](https://t.me/nqmicro)
