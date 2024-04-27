@@ -59,7 +59,7 @@ The trading strategies and indicators shared here are for educational purposes o
 
 # License
 
-The project is licensed under: [**CC-NY-BC**](http://creativecommons.org/licenses/by-nc/4.0/)
+All scripts under project are licensed under [**CC NY-BC 4.0**](http://creativecommons.org/licenses/by-nc/4.0/)
 
 Commercial reuse is **strictly prohibited**
 
