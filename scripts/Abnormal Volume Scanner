@@ -1,0 +1,100 @@
+// =============================================================================================================
+// This Pine Script™ is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License.
+// To view a copy of this license, visit http://creativecommons.org/licenses/by-nc/4.0/ or send a letter to
+// Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
+// =============================================================================================================
+// tradingview © sayopony, github @ 2LV, telegram @ nqmicro, discord @ nqmini
+
+//@version=5
+indicator("Abnormal Volume Scanner", overlay=false, max_lines_count = 500, precision=0)
+
+// inputs
+growingColor = input.color(defval = color.rgb(127, 255, 189, 25), title = 'Growing Volume Color', group = 'Volume Personalization')
+fallingColor = input.color(defval = color.rgb(254, 87, 101, 25), title = 'Falling Volume Color', group = 'Volume Personalization')
+neutralColor  = input.color(defval = color.rgb(255, 255, 255, 25), title = 'Neutral Volume Color', group = 'Volume Personalization')
+prevVolBar = input.bool(defval = false, title = 'Color based on previous volume', tooltip = 'Base volume color off the previous volume bar instead of OHLC values', group = 'Volume Personalization')
+
+volMA = input.bool(defval = false, title = 'Enable Volume Moving Average', group = 'Volume Moving Average')
+volMAColor = input.color(defval = color.rgb(255, 255, 255), title = 'Moving Average Color', group = 'Volume Moving Average')
+volMALength = input.int(defval = 20, minval = 1, title = 'Moving Average Length', group = 'Volume Moving Average')
+
+abnormalVolSpike = input.bool(defval = true, title = 'Enable Abnormal Volume Spike', group = 'Abnormal Volume')
+abnormalVolLoss = input.bool(defval = true, title = 'Enable Abnormal Volume Loss', group = 'Abnormal Volume')
+plotabnormalVolSpikeShape = input.bool(defval = false, title="Plot Shapes On Abnormal", tooltip = 'Plots a shape on any abnormal volume bars (change color and shape under style tab)', group='Abnormal Volume')
+abnormalVolSpikeColor = input.color(defval = color.rgb(0, 136, 255, 25), title = 'Abnormal High Volume Color', tooltip = 'The color of the abnormal volume bar (does not change color if "Plot Shapes" is enabled)', group = 'Abnormal Volume')
+abnormalVolLossColor = input.color(defval = color.rgb(255, 0, 204, 25), title = 'Abnormal Low Volume Color', tooltip = 'The color of the abnormal volume bar (does not change color if "Plot Shapes" is enabled)', group = 'Abnormal Volume')
+abnormalVolSpikeCandles = input.int(defval = 3, minval = 1, title = 'Tracked Candles', tooltip = 'The average of X amount of past candle volume', group = 'Abnormal Volume')
+abnormalVolSpikeMultiplier = input.float(defval = 0.4, minval = 0, title = 'Abnormal Volume Multiplier', tooltip = 'X amount multipier necessary to be considered abnormal (es. 0.3 means 1.3x multipler for abnormal spike or 0.7x for abnormal loss)', group = 'Abnormal Volume')
+
+increasingVolume = input.bool(defval = true, title = 'Enable Increasing Volume', group = 'Increasing/Decreasing Volume')
+IVColor = input.color(defval = color.rgb(90, 255, 170, 48), title = 'Increasing Volume Line Color', group = 'Increasing/Decreasing Volume')
+decreasingVolume = input.bool(defval = true, title = 'Enable Decreasing Volume', group = 'Increasing/Decreasing Volume')
+DVColor = input.color(defval = color.rgb(242, 54, 70, 27), title = 'Decreasing Volume Line Color', group = 'Increasing/Decreasing Volume')
+consecutiveCandlesLimit = input.int(defval = 3, minval = 1, title = 'Consecutive Candle Requirement', tooltip = 'How many candle required in a row to be considered increasing/decreasing volume', group = 'Increasing/Decreasing Volume') - 1
+minVolChange = input.float(defval = 0.075, minval = 0.01, title = 'Minimum Volume Change', tooltip = 'Amount of change in volume per candle required (ex. 0.1 needs 10% more/less in change of volume per candle)', group = 'Increasing/Decreasing Volume')
+maxVolChange = input.float(defval = 0.3, minval = 0.01, title = 'Maximum Volume Change', tooltip = 'Maximum amount of change in volume per candle allowed (ex. 0.5 limits to 50% more/less in change of volume per candle)', group = 'Increasing/Decreasing Volume')
+
+// variables
+greenCandle = open < close
+redCandle = open > close
+neutralCandle = open == close
+color candleColor = na
+AVSVolReq = ta.sma(volume, abnormalVolSpikeCandles) * (1 + abnormalVolSpikeMultiplier)
+AVLVolReq = ta.sma(volume, abnormalVolSpikeCandles) * (1 - abnormalVolSpikeMultiplier)
+var line mostRecentDVLine = na
+var line mostRecentIVLine = na
+greenVol = (greenCandle and not prevVolBar) or (volume[1] < volume and prevVolBar)
+redVol = (redCandle and not prevVolBar) or (volume[1] > volume and prevVolBar)
+neutralVol = (neutralCandle and not prevVolBar) or (volume[1] == volume and prevVolBar)
+volSpike = volume > AVSVolReq
+volLoss = volume < AVLVolReq
+
+// assign colors
+if greenVol
+    candleColor := growingColor
+if redVol
+    candleColor := fallingColor
+if neutralVol
+    candleColor := neutralColor
+if volSpike and abnormalVolSpike and not plotabnormalVolSpikeShape
+    candleColor := abnormalVolSpikeColor
+if volLoss and abnormalVolLoss and not plotabnormalVolSpikeShape
+    candleColor := abnormalVolLossColor
+
+// detect decreasing/increasing volume
+DVStartIndex = 1
+IVStartIndex = 1
+while true
+    if volume[DVStartIndex] > volume[DVStartIndex - 1] and volume[DVStartIndex] * (1-minVolChange) >= volume[DVStartIndex - 1] and volume[DVStartIndex] * (1-maxVolChange) <= volume[DVStartIndex - 1]
+        DVStartIndex += 1
+        int(na)
+    else
+        break
+        int(na)
+while true
+    if volume[IVStartIndex] < volume[IVStartIndex - 1] and volume[IVStartIndex] * (1+minVolChange) <= volume[IVStartIndex - 1] and volume[IVStartIndex] * (1+maxVolChange) >= volume[IVStartIndex - 1]
+        IVStartIndex += 1
+        int(na)
+    else
+        break
+        int(na)
+
+DVStartIndex -= 1
+IVStartIndex -= 1
+            
+// plotting
+plot(volume, color=candleColor, style=plot.style_columns, precision = 0, editable = false)
+plotshape(volume > AVSVolReq and plotabnormalVolSpikeShape, style=shape.circle, location = location.bottom)
+plot(volMA ? ta.sma(volume, volMALength) : na, color=volMAColor, style=plot.style_line, display=display.all - display.price_scale, editable = false)
+
+if DVStartIndex >= consecutiveCandlesLimit and decreasingVolume and (na(mostRecentDVLine) or line.get_x1(mostRecentDVLine) != time[DVStartIndex])
+    mostRecentDVLine := line.new(time[DVStartIndex], volume[DVStartIndex] * 1.05, time, volume * 1.05, color = DVColor, width = 2, xloc=xloc.bar_time)
+else if DVStartIndex >= consecutiveCandlesLimit and decreasingVolume and not na(mostRecentDVLine) and line.get_x1(mostRecentDVLine) == time[DVStartIndex]
+    line.set_x2(mostRecentDVLine, time)
+    line.set_y2(mostRecentDVLine, volume)
+
+if IVStartIndex >= consecutiveCandlesLimit and increasingVolume and (na(mostRecentIVLine) or line.get_x1(mostRecentIVLine) != time[IVStartIndex])
+    mostRecentIVLine := line.new(time[IVStartIndex], volume[IVStartIndex] * 1.05, time, volume * 1.05, color = IVColor, width = 2, xloc=xloc.bar_time)
+else if IVStartIndex >= consecutiveCandlesLimit and increasingVolume and not na(mostRecentIVLine) and line.get_x1(mostRecentIVLine) == time[IVStartIndex]
+    line.set_x2(mostRecentIVLine, time)
+    line.set_y2(mostRecentIVLine, volume)
