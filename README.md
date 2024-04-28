@@ -45,7 +45,7 @@ This indicator aims to identify price levels where price action has quickly reve
 ![image](https://github.com/2LV/Tradingview-Indicators/assets/70970973/8f823bf0-69f7-4c27-a726-967af4ca3bfd)
 
 ## [Abnormal Volume Scanner](https://github.com/2LV/Tradingview-Indicators/blob/main/scripts/Abnormal%20Volume%20Scanner)
-This indicator aims to revolutionize and simplify volume analysis through multiple different pattern recognition methods. Volume is the first piece of evidence in any moves in price action and retail traders must understand and analyze volume to properly assess future price action. Volume can be paired with a variety of different strategies and indicators for maximum efficiency. Add it to your chart [here](https://www.tradingview.com/script/TRSrfvsB-Abnormal-Volume-Scanner/)
+This indicator aims to revolutionize and simplify volume analysis through multiple different pattern recognition methods. Volume is the first piece of evidence in any moves in price action and retail traders must understand and analyze volume to properly assess future price action. Volume can be paired with a variety of different strategies and indicators for maximum efficiency.
 
 ### Features
 
