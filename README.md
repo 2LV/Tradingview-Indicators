@@ -16,7 +16,7 @@ This indicator aims to identify price levels where institutional investors have 
 
 ### How to trade
 
-1. First, make sure you are trading an institutionally traded instruments. Second, look for an exaggerated volume spike in suppy or demand. This is the first indication of a potential reversal, also known as volume confirmation. After a confirmation appears, we need to make sure that it is enough to cause a reversal in the trend by waiting for a trend change confirmation. There are multiple ways to confirm a trend change: ChoCH, trendline break, BOS, etc.
+First, make sure you are trading an institutionally traded instruments. Second, look for an exaggerated volume spike in suppy or demand. This is the first indication of a potential reversal, also known as volume confirmation. After a confirmation appears, we need to make sure that it is enough to cause a reversal in the trend by waiting for a trend change confirmation. There are multiple ways to confirm a trend change: ChoCH, trendline break, BOS, etc.
 
 ![image](https://github.com/2LV/Tradingview-Indicators/assets/70970973/3b0c8719-e79e-4677-999f-8f4400868a15)
 
