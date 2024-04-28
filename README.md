@@ -1,7 +1,11 @@
-[Setup](https://github.com/8pz/tradingview-indicators?tab=readme-ov-file#setup) • [Disclaimer](https://github.com/8pz/tradingview-indicators?tab=readme-ov-file#disclaimer) • [License](https://github.com/8pz/tradingview-indicators?tab=readme-ov-file#license)
+[Setup](https://github.com/8pz/tradingview-indicators?tab=readme-ov-file#setup) • [Disclaimer](https://github.com/8pz/tradingview-indicators?tab=readme-ov-file#disclaimer) • [License](https://github.com/8pz/tradingview-indicators?tab=readme-ov-file#license) <img align="right" src="https://github.com/2LV/Tradingview-Indicators/assets/70970973/74846972-8cdd-491e-9d35-272fe0a8167d" alt="Pinescript Logo" width="300" height="185.31" /> 
+
+A collections of different Tradingview indicators and their retrospective trading strategies built in Pinescript V5. All scripts on this repository are up to date, but Tradingview scripts can be behind on updates so please make sure to use the most updated script for the most accurate results. All suggestions and recommendations for new scripts are welcome.
+
+<br />
 
 ## [Institutional Supply & Demand Zones](https://github.com/8pz/Tradingview-Indicators/blob/main/scripts/Institutional%20Supply%20%26%20Demand%20Zones)
-This indicator aims to identify price levels where institutional investors have positioned their buy or sell orders. These buy orders establish "demand zones," while sell orders create "supply zones." Identifying these zones enables us to anticipate potential reversals in price trends, allowing us to profitably engage in these significant market movements alongside major institutions. These zones are formed when price action goes from balanced to imbalanced. These zones are based on orders. Unlike standard support and resistance levels, when price breaks below a demand zone or above a supply zone, these zones disappear from the chart. Supply is formed by a green candle followed by a major red candle that is at least double the size of previous green candle. The zone is then charted from the open of the green candle to the highest point in the candle. Vice versa for a demand zone (red candle into green candle). Add it to your chart [here](https://www.tradingview.com/script/eAO9uAu5-Institutional-Supply-and-Demand-Zones/)
+This indicator aims to identify price levels where institutional investors have positioned their buy or sell orders. These buy orders establish "demand zones," while sell orders create "supply zones." Identifying these zones enables us to anticipate potential reversals in price trends, allowing us to profitably engage in these significant market movements alongside major institutions. These zones are formed when price action goes from balanced to imbalanced. These zones are based on orders. Unlike standard support and resistance levels, when price breaks below a demand zone or above a supply zone, these zones disappear from the chart. Supply is formed by a green candle followed by a major red candle that is at least double the size of previous green candle. The zone is then charted from the open of the green candle to the highest point in the candle. Vice versa for a demand zone (red candle into green candle). Typically when a zone is retested multiple times, it will have a higher chance of breaking as more and more orders are being filled. Add it to your chart [here](https://www.tradingview.com/script/eAO9uAu5-Institutional-Supply-and-Demand-Zones/)
 
 ### Features
 
@@ -11,15 +15,16 @@ This indicator aims to identify price levels where institutional investors have 
 4. Display Text/Display High/Low: Whether to or not to display the tops and bottoms of a zone as text (ie. Top: 4000.00 Bottom: 3900.00)
 
 ### How to trade
-1. Look for a volume spike in a zone
-2. A trend change out of the zone (trendline break, ChoCh, etc)
+
+1. First, make sure you are trading an institutionally traded instruments. Second, look for an exaggerated volume spike in suppy or demand. This is the first indication of a potential reversal, also known as volume confirmation. After a confirmation appears, we need to make sure that it is enough to cause a reversal in the trend by waiting for a trend change confirmation. There are multiple ways to confirm a trend change: ChoCH, trendline break, BOS, etc.
 
 ![image](https://github.com/2LV/Tradingview-Indicators/assets/70970973/3b0c8719-e79e-4677-999f-8f4400868a15)
 
 ## [Reversal Pivot Points](https://github.com/8pz/tradingview-indicators/blob/main/scripts/Reversal%20Pivot%20Points) 
-This indicator aims to identify price levels where price action has quickly reversed from. These "pivots" establish major levels where major liquidity is located. Unlike standard support and resistance levels, when price breaks below or above a pivot, these pivots disappear from the chart. Comes with various customization features built to fit all. Add it to your chart [here](https://www.tradingview.com/script/OGeG7pyt-Reversal-Pivot-Points/)
+This indicator aims to identify price levels where price action has quickly reversed from. These "pivots" establish major levels where major liquidity is located. Unlike traditional support and resistance levels, when price breaks below or above a pivot, these pivots disappear from the chart. Add it to your chart [here](https://www.tradingview.com/script/OGeG7pyt-Reversal-Pivot-Points/)
 
 ### Features
+
 1. Pivot Timeframe: Identify and plot pivots from one specific timeframe and see it from all lower timeframes
 2. Pivot left/right bar limit: A feature aimed at preventing false pivots identification
 3. Remove On Close (ROC): Feature to only remove pivots once price close under it
@@ -35,9 +40,35 @@ This indicator aims to identify price levels where price action has quickly reve
 ### How to trade
 
 1. Pivots can be traded to or from. The stock market (market makers) will tend to "chase" liquidity in order to fill orders at better averages. This allows us retail traders to to participate alongside these moves to these pivots. Once price action hits a pivot, it can do two things: break the pivot and continue or bounce off it. We can participate alongside these bounces after confirmation of a reversal (doji, volume, etc). These bounce plays are high risk as it's generally 50-50, but the risk to reward is typically also very high, making them very valuable to take.
-2. Typically, the market is a fluid environment and should be "natural," so perfect things (manmade and filled with liquidity) shouldn't occur. With this knowledge, we can expect these "PDT/PDB" to break as they are not natural and have heavy liquidity on and above/below them. We can trade to these levels and expect them to break if price action comes near them again. 
+2. Typically, the market is a fluid environment and should be "natural" so perfect things (manmade therefore filled with liquidity) should not occur. We can expect these perfect tops and bottoms, referred to as "PDT/PDB", to break as they are not natural and have heavy liquidity on and above/below them. We can trade to these levels and expect them to break if price action comes near them again. 
 
 ![image](https://github.com/2LV/Tradingview-Indicators/assets/70970973/8f823bf0-69f7-4c27-a726-967af4ca3bfd)
+
+## [Abnormal Volume Scanner](https://github.com/2LV/Tradingview-Indicators/blob/main/scripts/Abnormal%20Volume%20Scanner)
+This indicator aims to revolutionize and simpify volume analysis through multiple different pattern recognition methods. Volume is the first piece of evidence in any moves in price action and retail traders must understand and analyze volume to properly assess future price action. Volume can be paired with a variety of different strategies and Add it to your chart [here]()
+
+### Features
+
+1. Color Based On Previous Volume: Base volume color off the previous volume bar instead of OHLC values
+2. Volume MA: Basic moving average for X volume bars in the past
+3. Abnormal Volume Spike: Major spikes of X multipler (based off "Abnormal Volume Multipier") in volume compared to X volume bars in the past (based off "Tracked Candles")
+4. Abnormal Volume Loss: Major losses of X multipler (based off "Abnormal Volume Multipier") in volume compared to X volume bars in the past (based off "Tracked Candles")
+5. Plot Shapes On Abnormal: Plots a shape on any abnormal volume bars (change color and shape under style tab. Feature disables color bar changes of abnormal volume)
+6. Tracked Candles: The average of X candles in the past
+7. Abnormal Volume Multipier: X amount multipier necessary to be considered abnormal (es. 0.3 means 1.3x multipler for abnormal spike or 0.7x for abnormal loss)
+8. Increasing/Decreasing Volume: Creates a trendline from the high/low
+9. Consecutive Candle Requirement: How many candle required in a row to be considered increasing/decreasing volume
+10. Minimum/Maximum Volume Change: Minimum/maximu amount of change in volume per candle allowed (ex. 0.5 limits to 50% more/less in change of volume per candle, 0.1 needs 10% more/less in change of volume per candle)
+
+### How to trade
+
+1. One of the most basic ways of trading volume is playing breakouts with volume/momentum. A breakout can be any type of resistance/support (trendlines, pivots, etc). We will wait for a breakout pattern to form, then enter whichever direction abnormal volume appears in after a breakout. 
+2. Volume is usually used alongside other strategies to provide proper entries. It be used alongside the [Supply & Demand](https://github.com/2LV/Tradingview-Indicators?tab=readme-ov-file#institutional-supply--demand-zones) and [Reversal Pivots](https://github.com/2LV/Tradingview-Indicators?tab=readme-ov-file#reversal-pivot-points) strategy to prove confirmation.
+3. We can also use volume to assess the strength of a move. For example, if a move up has decreasing volume alongside smaller candlesticks, we can expect and enter a pullback after proper confirmation (volume spike, reversal candle, momentum, etc). Increasing volume alongside decreasing momentum/candlestick size can mean that there are volume increases in the opposite side, allowing us to expect potential reversals. We can also use volume to assess the strength of a pullback -- if a pullback is backed by very strong momentum and volume, we can expect the pullback to turn into a potential reversal.
+4. Decreasing volume typically does not last and can "break out" in a sense. For example, if there are multiple candles that are weak and decreasing in volume, we can expect there to be a spike in volume coming and enter whichever direction this spike goes.
+5. Sudden decreases in volume can mean temporary accumulation/solidation, allowing us to anticipate potential continuation.
+
+![image](https://github.com/2LV/Tradingview-Indicators/assets/70970973/5e717e0a-c7d9-4b38-8d2b-793290eb380d)
 
 ## [Multiple Moving Average](https://github.com/8pz/tradingview-indicators/blob/main/scripts/Multiple%20Moving%20Averages) 
 A simple indicator to plot 5 different types of moving averages (SMA, EMA, WMA, HMA, RMA) and VWAP in different colors.
@@ -55,7 +86,7 @@ A simple indicator to plot 5 different types of moving averages (SMA, EMA, WMA, 
 
 # Disclaimer
 
-The trading strategies and indicators shared here are for educational purposes only. They do not constitute financial advice or recommendations. Trading carries risks, and past performance is not indicative of future results. Traders should exercise caution and conduct their own research before making any trading decisions.
+The trading indicators and strategies shared here are for educational purposes only. They do not constitute financial advice or recommendations. Trading carries risks, and past performance is not indicative of future results. The creator(s) of the project are not responsible for any losses from recommendations from any indicators under this project. Traders should exercise caution and conduct their own research before making any trading decisions.
 
 # License
 
