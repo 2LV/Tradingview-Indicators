@@ -3,10 +3,10 @@
 // To view a copy of this license, visit http://creativecommons.org/licenses/by-nc/4.0/ or send a letter to
 // Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // =============================================================================================================
-// github @ 2LV, telegram @ nqmicro, discord @ nqmini
+// tradingview © sayopony, github @ 2LV, telegram @ nqmicro, discord @ nqmini
 
 //@version=5
-indicator("Abnormal Volume Scanner", overlay=false, max_lines_count = 500, precision=0)
+indicator("Abnormal Volume Scanner", overlay=false, max_lines_count = 500, precision=0, format=format.volume)
 
 // inputs
 growingColor = input.color(defval = color.rgb(127, 255, 189, 25), title = 'Growing Volume Color', group = 'Volume Personalization')
