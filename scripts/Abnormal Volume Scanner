@@ -3,7 +3,7 @@
 // To view a copy of this license, visit http://creativecommons.org/licenses/by-nc/4.0/ or send a letter to
 // Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // =============================================================================================================
-// tradingview © sayopony, github @ 2LV, telegram @ nqmicro, discord @ nqmini
+// github @ 2LV, telegram @ nqmicro, discord @ nqmini
 
 //@version=5
 indicator("Abnormal Volume Scanner", overlay=false, max_lines_count = 500, precision=0, format=format.volume)
@@ -27,9 +27,9 @@ abnormalVolSpikeCandles = input.int(defval = 3, minval = 1, title = 'Tracked Can
 abnormalVolSpikeMultiplier = input.float(defval = 0.4, minval = 0, title = 'Abnormal Volume Multiplier', tooltip = 'X amount multipier necessary to be considered abnormal (es. 0.3 means 1.3x multipler for abnormal spike or 0.7x for abnormal loss)', group = 'Abnormal Volume')
 
 increasingVolume = input.bool(defval = true, title = 'Enable Increasing Volume', group = 'Increasing/Decreasing Volume')
-IVColor = input.color(defval = color.rgb(90, 255, 170, 48), title = 'Increasing Volume Line Color', group = 'Increasing/Decreasing Volume')
+IVColor = input.color(defval = color.rgb(90, 255, 170, 25), title = 'Increasing Volume Line Color', group = 'Increasing/Decreasing Volume')
 decreasingVolume = input.bool(defval = true, title = 'Enable Decreasing Volume', group = 'Increasing/Decreasing Volume')
-DVColor = input.color(defval = color.rgb(242, 54, 70, 27), title = 'Decreasing Volume Line Color', group = 'Increasing/Decreasing Volume')
+DVColor = input.color(defval = color.rgb(242, 54, 70, 25), title = 'Decreasing Volume Line Color', group = 'Increasing/Decreasing Volume')
 consecutiveCandlesLimit = input.int(defval = 3, minval = 1, title = 'Consecutive Candle Requirement', tooltip = 'How many candle required in a row to be considered increasing/decreasing volume', group = 'Increasing/Decreasing Volume') - 1
 minVolChange = input.float(defval = 0.05, minval = 0.01, title = 'Minimum Volume Change', tooltip = 'Amount of change in volume per candle required (ex. 0.1 needs 10% more/less in change of volume per candle)', group = 'Increasing/Decreasing Volume')
 maxVolChange = input.float(defval = 0.3, minval = 0.01, title = 'Maximum Volume Change', tooltip = 'Maximum amount of change in volume per candle allowed (ex. 0.5 limits to 50% more/less in change of volume per candle)', group = 'Increasing/Decreasing Volume')
