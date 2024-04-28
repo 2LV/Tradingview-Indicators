@@ -45,28 +45,28 @@ This indicator aims to identify price levels where price action has quickly reve
 ![image](https://github.com/2LV/Tradingview-Indicators/assets/70970973/8f823bf0-69f7-4c27-a726-967af4ca3bfd)
 
 ## [Abnormal Volume Scanner](https://github.com/2LV/Tradingview-Indicators/blob/main/scripts/Abnormal%20Volume%20Scanner)
-This indicator aims to revolutionize and simpify volume analysis through multiple different pattern recognition methods. Volume is the first piece of evidence in any moves in price action and retail traders must understand and analyze volume to properly assess future price action. Volume can be paired with a variety of different strategies and indicator for maximum efficiency. Add it to your chart [here]()
+This indicator aims to revolutionize and simplify volume analysis through multiple different pattern recognition methods. Volume is the first piece of evidence in any moves in price action and retail traders must understand and analyze volume to properly assess future price action. Volume can be paired with a variety of different strategies and indicators for maximum efficiency. Add it to your chart [here]()
 
 ### Features
 
 1. Color Based On Previous Volume: Base volume color off the previous volume bar instead of OHLC values
 2. Volume MA: Basic moving average for X volume bars in the past
-3. Abnormal Volume Spike: Major spikes of X multipler (based off "Abnormal Volume Multipier") in volume compared to X volume bars in the past (based off "Tracked Candles")
-4. Abnormal Volume Loss: Major losses of X multipler (based off "Abnormal Volume Multipier") in volume compared to X volume bars in the past (based off "Tracked Candles")
+3. Abnormal Volume Spike: Major spikes of X multiplier (based off "Abnormal Volume multiplier") in volume compared to X volume bars in the past (based off "Tracked Candles")
+4. Abnormal Volume Loss: Major losses of X multiplier (based off "Abnormal Volume multiplier") in volume compared to X volume bars in the past (based off "Tracked Candles")
 5. Plot Shapes On Abnormal: Plots a shape on any abnormal volume bars (change color and shape under style tab. Feature disables color bar changes of abnormal volume)
 6. Tracked Candles: The average of X candles in the past
-7. Abnormal Volume Multipier: X amount multipier necessary to be considered abnormal (es. 0.3 means 1.3x multipler for abnormal spike or 0.7x for abnormal loss)
+7. Abnormal Volume Multiplier: X amount multiplier necessary to be considered abnormal (e.g., 0.3 means 1.3x multiplier for abnormal spike or 0.7x for abnormal loss)
 8. Increasing/Decreasing Volume: Creates a trendline from the high/low
-9. Consecutive Candle Requirement: How many candle required in a row to be considered increasing/decreasing volume
-10. Minimum/Maximum Volume Change: Minimum/maximu amount of change in volume per candle allowed (ex. 0.5 limits to 50% more/less in change of volume per candle, 0.1 needs 10% more/less in change of volume per candle)
-
+9. Consecutive Candle Requirement: How many candles are required in a row to be considered increasing/decreasing volume
+10. Minimum/Maximum Volume Change: Minimum/maximum amount of change in volume per candle allowed (e.g., 0.5 limits to 50% more/less in change of volume per candle, 0.1 needs 10% more/less in change of volume per candle)
+    
 ### How to trade
 
 1. One of the most basic ways of trading volume is playing breakouts with volume/momentum. A breakout can be any type of resistance/support (trendlines, pivots, etc). We will wait for a breakout pattern to form, then enter whichever direction abnormal volume appears in after a breakout. 
 2. Volume is usually used alongside other strategies to provide proper entries. It be used alongside the [Supply & Demand](https://github.com/2LV/Tradingview-Indicators?tab=readme-ov-file#institutional-supply--demand-zones) and [Reversal Pivots](https://github.com/2LV/Tradingview-Indicators?tab=readme-ov-file#reversal-pivot-points) strategy to prove confirmation.
 3. We can also use volume to assess the strength of a move. For example, if a move up has decreasing volume alongside smaller candlesticks, we can expect and enter a pullback after proper confirmation (volume spike, reversal candle, momentum, etc). Increasing volume alongside decreasing momentum/candlestick size can mean that there are volume increases in the opposite side, allowing us to expect potential reversals. We can also use volume to assess the strength of a pullback -- if a pullback is backed by very strong momentum and volume, we can expect the pullback to turn into a potential reversal.
 4. Decreasing volume typically does not last and can "break out" in a sense. For example, if there are multiple candles that are weak and decreasing in volume, we can expect there to be a spike in volume coming and enter whichever direction this spike goes.
-5. Sudden decreases in volume can mean temporary accumulation/solidation, allowing us to anticipate potential continuation.
+5. Sudden decreases in volume can mean temporary accumulation/consolidation, allowing us to anticipate potential continuation.
 
 ![image](https://github.com/2LV/Tradingview-Indicators/assets/70970973/5e717e0a-c7d9-4b38-8d2b-793290eb380d)
 
