@@ -20,7 +20,7 @@ First, make sure you are trading an institutionally traded instruments. Second, 
 
 ![image](https://github.com/2LV/Tradingview-Indicators/assets/70970973/3b0c8719-e79e-4677-999f-8f4400868a15)
 
-## [Reversal Pivot Points](https://github.com/2LV/tradingview-indicators/blob/main/scripts/Reversal%20Pivot%20Points) 
+## [Reversal Pivot Points](https://github.com/8pz/tradingview-indicators/blob/main/scripts/Reversal%20Pivot%20Points) 
 This indicator aims to identify price levels where price action has quickly reversed from. These "pivots" establish major levels where major liquidity is located. Unlike traditional support and resistance levels, when price breaks below or above a pivot, these pivots disappear from the chart. Add it to your chart [here](https://www.tradingview.com/script/OGeG7pyt-Reversal-Pivot-Points/)
 
 ### Features
@@ -69,7 +69,7 @@ This indicator aims to revolutionize and simplify volume analysis through multip
 
 ![image](https://github.com/2LV/Tradingview-Indicators/assets/70970973/5e717e0a-c7d9-4b38-8d2b-793290eb380d)
 
-## [Multiple Moving Average](https://github.com/2LV/tradingview-indicators/blob/main/scripts/Multiple%20Moving%20Averages) 
+## [Multiple Moving Average](https://github.com/8pz/tradingview-indicators/blob/main/scripts/Multiple%20Moving%20Averages) 
 A simple indicator to plot 5 different types of moving averages (SMA, EMA, WMA, HMA, RMA) and VWAP in different colors.
 
 ![image](https://github.com/2LV/Tradingview-Indicators/assets/70970973/30bdda4a-4369-4510-b472-b083f6ece1d8)
@@ -81,7 +81,7 @@ A simple indicator to plot 5 different types of moving averages (SMA, EMA, WMA, 
 3. Click "New indicator"
 4. Paste the script in and press "Add to chart"
 
-![image](https://github.com/2LV/tradingview-scripts/assets/70970973/b0e9d1bf-55da-4ab4-a3df-6396d7b980a4)
+![image](https://github.com/8pz/tradingview-scripts/assets/70970973/b0e9d1bf-55da-4ab4-a3df-6396d7b980a4)
 
 # Disclaimer
 
