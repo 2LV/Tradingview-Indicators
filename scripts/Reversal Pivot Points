@@ -6,7 +6,7 @@
 // github @ 2LV, telegram @ nqmicro, discord @ nqmini
 
 //@version=5
-indicator("Reversal Pivot Points", shorttitle="Reversal Pivot Points", overlay=true, max_lines_count=500, max_labels_count=500)
+indicator("Reversal Pivot Points", overlay=true, max_lines_count=500, max_labels_count=500)
 
 //inputs
 pivotTimeframe = input.string("15m", title="Pivot Timeframe", options=["1m", "3m", "5m", "10m", "15m", "30m", "45m", "1h", "2h", "3h", "4h", "D", "W"], group='Pivot Settings', tooltip='The timeframe the script looks for pivots at')
