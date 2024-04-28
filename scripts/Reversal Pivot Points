@@ -6,95 +6,183 @@
 // github @ 2LV, telegram @ nqmicro, discord @ nqmini
 
 //@version=5
-indicator("Abnormal Volume Scanner", overlay=false, max_lines_count = 500, precision=0, format=format.volume)
+indicator("Reversal Pivot Points", shorttitle="Reversal Pivot Points", overlay=true, max_lines_count=500, max_labels_count=500)
 
-// inputs
-growingColor = input.color(defval = color.rgb(127, 255, 189, 25), title = 'Growing Volume Color', group = 'Volume Personalization')
-fallingColor = input.color(defval = color.rgb(254, 87, 101, 25), title = 'Falling Volume Color', group = 'Volume Personalization')
-neutralColor  = input.color(defval = color.rgb(255, 255, 255, 25), title = 'Neutral Volume Color', group = 'Volume Personalization')
-prevVolBar = input.bool(defval = false, title = 'Color based On Previous Volume', tooltip = 'Base volume color off the previous volume bar instead of OHLC values', group = 'Volume Personalization')
+//inputs
+pivotTimeframe = input.string("15m", title="Pivot Timeframe", options=["1m", "3m", "5m", "10m", "15m", "30m", "45m", "1h", "2h", "3h", "4h", "D", "W"], group='Pivot Settings', tooltip='The timeframe the script looks for pivots at')
+pivotLeftBars = input.int(defval=3, title="Left Bars Limit", minval=1, group='Pivot Settings', tooltip='Prevents pivots from being created if there is already one X candles back')
+pivotRightBars = input.int(defval=2, title="Right Bars Limit", minval=1, group='Pivot Settings', tooltip='Prevents pivots from being created only after if the pivot is still valid after X amount of candles')
+onClose = input.bool(defval=false, title="Remove On Close (ROC)", group='Pivot Settings', tooltip='Only removes pivot if price action closes under/above the pivot')
+onCloseTimeframe = input.string("15m", title="ROC Timeframe", options=["1m", "3m", "5m", "10m", "15m", "30m", "45m", "1h", "2h", "3h", "4h", "D", "W"], group='Pivot Settings', tooltip='The timeframe ROC looks at to see if any candles on that timeframe closed under/above the level')
+waitForClose = input.bool(defval=false, title="Wait For Close", group='Pivot Settings', tooltip='Removes pivot only after the current candle closes')
 
-volMA = input.bool(defval = false, title = 'Enable Volume Moving Average', group = 'Volume Moving Average')
-volMAColor = input.color(defval = color.rgb(255, 255, 255), title = 'Moving Average Color', group = 'Volume Moving Average')
-volMALength = input.int(defval = 20, minval = 1, title = 'Moving Average Length', group = 'Volume Moving Average')
+resistanceEnable = input(true, title="Enable Resistance Pivots", group="Line Settings")
+resistanceColor = input.color(defval=color.rgb(255, 255, 255), title='Resistance Line Color', group='Line Settings')
+supportEnable = input(true, title="Enable Support Pivots", group="Line Settings")
+supportColor = input.color(defval=color.rgb(255, 255, 255), title='Support Line Color', group='Line Settings')
+extensionType = input.string("Current", title="Line Extension Type", options=["Current", "Left", "Right", "Both"], group='Line Settings')
+offset = input.int(defval=15, title="Line Offset", group='Line Settings', tooltip='How much to offset (in bars) the line and label from the current candle')
+lineType = input.string("Solid (─)", title="Line Style", options=["Solid (─)", "Dotted (┈)", "Dashed (╌)", "Arrow Left (←)", "Arrow Right (→)", "Arrows Both (↔)"], group='Line Settings')
 
-abnormalVolSpike = input.bool(defval = true, title = 'Enable Abnormal Volume Spike', group = 'Abnormal Volume')
-abnormalVolLoss = input.bool(defval = true, title = 'Enable Abnormal Volume Loss', group = 'Abnormal Volume')
-plotabnormalVolSpikeShape = input.bool(defval = false, title="Plot Shapes On Abnormal", tooltip = 'Plots a shape on any abnormal volume bars (change color and shape under style tab)', group='Abnormal Volume')
-abnormalVolSpikeColor = input.color(defval = color.rgb(0, 136, 255, 25), title = 'Abnormal High Volume Color', tooltip = 'The color of the abnormal volume bar (does not change color if "Plot Shapes" is enabled)', group = 'Abnormal Volume')
-abnormalVolLossColor = input.color(defval = color.rgb(255, 0, 204, 25), title = 'Abnormal Low Volume Color', tooltip = 'The color of the abnormal volume bar (does not change color if "Plot Shapes" is enabled)', group = 'Abnormal Volume')
-abnormalVolSpikeCandles = input.int(defval = 3, minval = 1, title = 'Tracked Candles', tooltip = 'The average of X amount of past candle volume', group = 'Abnormal Volume')
-abnormalVolSpikeMultiplier = input.float(defval = 0.4, minval = 0, title = 'Abnormal Volume Multiplier', tooltip = 'X amount multipier necessary to be considered abnormal (es. 0.3 means 1.3x multipler for abnormal spike or 0.7x for abnormal loss)', group = 'Abnormal Volume')
-
-increasingVolume = input.bool(defval = true, title = 'Enable Increasing Volume', group = 'Increasing/Decreasing Volume')
-IVColor = input.color(defval = color.rgb(90, 255, 170, 25), title = 'Increasing Volume Line Color', group = 'Increasing/Decreasing Volume')
-decreasingVolume = input.bool(defval = true, title = 'Enable Decreasing Volume', group = 'Increasing/Decreasing Volume')
-DVColor = input.color(defval = color.rgb(242, 54, 70, 25), title = 'Decreasing Volume Line Color', group = 'Increasing/Decreasing Volume')
-consecutiveCandlesLimit = input.int(defval = 3, minval = 1, title = 'Consecutive Candle Requirement', tooltip = 'How many candle required in a row to be considered increasing/decreasing volume', group = 'Increasing/Decreasing Volume') - 1
-minVolChange = input.float(defval = 0.05, minval = 0.01, title = 'Minimum Volume Change', tooltip = 'Amount of change in volume per candle required (ex. 0.1 needs 10% more/less in change of volume per candle)', group = 'Increasing/Decreasing Volume')
-maxVolChange = input.float(defval = 0.3, minval = 0.01, title = 'Maximum Volume Change', tooltip = 'Maximum amount of change in volume per candle allowed (ex. 0.5 limits to 50% more/less in change of volume per candle)', group = 'Increasing/Decreasing Volume')
+displayLevel = input.bool(false, title="Display Level", group='Text Settings', tooltip='Whether to or not to display the price of the pivot')
+displayPerfectLevel = input.bool(defval=false, title="Display Perfect Level", group='Text Settings', tooltip='Labels a level if price action perfectly bounces off of it labeled as PDB/PDT (does not work if "Remove On Close" is enabled)')
+textColor =input.color(defval=color.rgb(255, 255, 255), title='Text Color', group='Text Settings')
+textSize =input.string("Small", title="Text Size", options=["Auto", "Tiny", "Small", "Normal", "Large", "Huge"], group='Text Settings')
 
 // variables
-greenCandle = open < close
-redCandle = open > close
-neutralCandle = open == close
-color candleColor = na
-AVSVolReq = ta.sma(volume, abnormalVolSpikeCandles) * (1 + abnormalVolSpikeMultiplier)
-AVLVolReq = ta.sma(volume, abnormalVolSpikeCandles) * (1 - abnormalVolSpikeMultiplier)
-var line mostRecentDVLine = na
-var line mostRecentIVLine = na
-greenVol = (greenCandle and not prevVolBar) or (volume[1] < volume and prevVolBar)
-redVol = (redCandle and not prevVolBar) or (volume[1] > volume and prevVolBar)
-neutralVol = (neutralCandle and not prevVolBar) or (volume[1] == volume and prevVolBar)
-volSpike = volume > AVSVolReq
-volLoss = volume < AVLVolReq
 
-// assign colors
-if greenVol
-    candleColor := growingColor
-if redVol
-    candleColor := fallingColor
-if neutralVol
-    candleColor := neutralColor
-if volSpike and abnormalVolSpike and not plotabnormalVolSpikeShape
-    candleColor := abnormalVolSpikeColor
-if volLoss and abnormalVolLoss and not plotabnormalVolSpikeShape
-    candleColor := abnormalVolLossColor
+pivotTimeframe := switch pivotTimeframe
+    '1m' => '1'
+    '3m' => '3'
+    '5m' => '5'
+    '10m' => '10'
+    '15m' => '15'
+    '30m' => '30'
+    '45m' => '45'
+    '1h' => '60'
+    '2h' => '120'
+    '3h' => '180'
+    '4h' => '240'
+    'D' => 'D'
+    'W' => 'W'
 
-// detect decreasing/increasing volume
-DVStartIndex = 1
-IVStartIndex = 1
-while true
-    if volume[DVStartIndex] > volume[DVStartIndex - 1] and volume[DVStartIndex] * (1-minVolChange) >= volume[DVStartIndex - 1] and volume[DVStartIndex] * (1-maxVolChange) <= volume[DVStartIndex - 1]
-        DVStartIndex += 1
-        int(na)
-    else
-        break
-        int(na)
-while true
-    if volume[IVStartIndex] < volume[IVStartIndex - 1] and volume[IVStartIndex] * (1+minVolChange) <= volume[IVStartIndex - 1] and volume[IVStartIndex] * (1+maxVolChange) >= volume[IVStartIndex - 1]
-        IVStartIndex += 1
-        int(na)
-    else
-        break
-        int(na)
+onCloseTimeframe := switch onCloseTimeframe
+    '1m' => '1'
+    '3m' => '3'
+    '5m' => '5'
+    '10m' => '10'
+    '15m' => '15'
+    '30m' => '30'
+    '45m' => '45'
+    '1h' => '60'
+    '2h' => '120'
+    '3h' => '180'
+    '4h' => '240'
+    'D' => 'D'
+    'W' => 'W'
 
-DVStartIndex -= 1
-IVStartIndex -= 1
+extensionType := switch extensionType
+    "Current" => extend.none
+    "Left" => extend.left
+    "Right" => extend.right
+    "Both" => extend.both
+
+lineType := switch lineType
+    "Solid (─)" => line.style_solid
+    "Dotted (┈)" => line.style_dotted
+    "Dashed (╌)" => line.style_dashed
+    "Arrow Left (←)" => line.style_arrow_left
+    "Arrow Right (→)" => line.style_arrow_right
+    "Arrows Both (↔)" => line.style_arrow_both
+
+textSize := switch textSize
+    "Auto" => size.auto
+    "Tiny" => size.tiny
+    "Small" => size.small
+    "Normal" => size.normal
+    "Large"   => size.large
+    "Huge" => size.huge
+
+[OCTF_Close] = request.security(syminfo.tickerid, onCloseTimeframe, [close[1]])
+momentCTD = math.round(time(timeframe.period) + (offset * 60000 * (timeframe.in_seconds() / 60)))
+var line[] resistance_HT = array.new_line()
+var line[] support_HT = array.new_line()
+var label[] resistance_labels = array.new_label()
+var label[] support_labels = array.new_label()
+var float[] resistance_levels = array.new_float()
+var float[] support_levels = array.new_float()
+
+// create pivots
+
+createPivots(timeframe) =>
+    [ph, pl] = request.security(syminfo.tickerid, timeframe, [math.round_to_mintick(ta.pivothigh(pivotLeftBars, pivotRightBars)), math.round_to_mintick(ta.pivotlow(pivotLeftBars, pivotRightBars))], gaps=barmerge.gaps_on)
+    momentCTD_HT = time(timeframe)[pivotRightBars]
+
+    // resistance pivots
+
+    if not na(ph) and not array.includes(resistance_levels, ph)
+        line ph_line = line.new(x1=momentCTD_HT, y1=ph, x2=momentCTD, y2=ph, extend=extensionType, xloc=xloc.bar_time, color=resistanceColor, style=lineType)
+        array.push(resistance_HT, ph_line)
+        array.push(resistance_levels, ph)
+        if displayLevel
+            label ph_label = label.new(x=momentCTD, y=ph, style=label.style_none, text=str.tostring(ph), xloc=xloc.bar_time, textcolor=textColor, size=textSize)
+            array.push(resistance_labels, ph_label)            
             
-// plotting
-plot(volume, color=candleColor, style=plot.style_columns, precision = 0, editable = false)
-plotshape(volume > AVSVolReq and plotabnormalVolSpikeShape, style=shape.circle, location = location.bottom)
-plot(volMA ? ta.sma(volume, volMALength) : na, color=volMAColor, style=plot.style_line, display=display.all - display.price_scale, editable = false)
+    // support pivots
 
-if DVStartIndex >= consecutiveCandlesLimit and decreasingVolume and (na(mostRecentDVLine) or line.get_x1(mostRecentDVLine) != time[DVStartIndex])
-    mostRecentDVLine := line.new(time[DVStartIndex], volume[DVStartIndex] * 1.05, time, volume * 1.05, color = DVColor, width = 2, xloc=xloc.bar_time)
-else if DVStartIndex >= consecutiveCandlesLimit and decreasingVolume and not na(mostRecentDVLine) and line.get_x1(mostRecentDVLine) == time[DVStartIndex]
-    line.set_x2(mostRecentDVLine, time)
-    line.set_y2(mostRecentDVLine, volume)
+    if not na(pl) and not array.includes(support_levels, pl)
+        line pl_line = line.new(x1=momentCTD_HT, y1=pl, x2=momentCTD, y2=pl, extend=extensionType, xloc=xloc.bar_time, color=supportColor, style=lineType)
+        array.push(support_HT, pl_line)
+        array.push(support_levels, pl)
+        if displayLevel
+            label pl_label = label.new(x=momentCTD, y=pl, style=label.style_none, text=str.tostring(pl), xloc=xloc.bar_time, textcolor=textColor, size=textSize)
+            array.push(support_labels, pl_label)
 
-if IVStartIndex >= consecutiveCandlesLimit and increasingVolume and (na(mostRecentIVLine) or line.get_x1(mostRecentIVLine) != time[IVStartIndex])
-    mostRecentIVLine := line.new(time[IVStartIndex], volume[IVStartIndex] * 1.05, time, volume * 1.05, color = IVColor, width = 2, xloc=xloc.bar_time)
-else if IVStartIndex >= consecutiveCandlesLimit and increasingVolume and not na(mostRecentIVLine) and line.get_x1(mostRecentIVLine) == time[IVStartIndex]
-    line.set_x2(mostRecentIVLine, time)
-    line.set_y2(mostRecentIVLine, volume)
+// init 
+
+if not timeframe.isseconds and timeframe.in_seconds() <= timeframe.in_seconds(pivotTimeframe)
+    createPivots(pivotTimeframe)
+
+// remove broken pivots
+
+i=0
+while i < array.size(resistance_HT) and array.size(resistance_HT) > 0
+    line currentLine = array.get(resistance_HT, i)
+    float breakLevel = line.get_y1(currentLine)
+    if ((high > breakLevel and not onClose) or (OCTF_Close > breakLevel and onClose)) and ((waitForClose and barstate.isconfirmed) or not waitForClose)
+        alert(message="Resistance Crossing @ " + str.tostring(breakLevel))
+        array.remove(resistance_HT, i)
+        if array.size(resistance_levels) > i
+            array.remove(resistance_levels, i)
+        line.delete(currentLine)        
+        if displayLevel and array.size(resistance_labels) > i
+            label currentLineLabel = array.get(resistance_labels, i) 
+            array.remove(resistance_labels, i)
+            label.delete(currentLineLabel)
+        int(na)
+    else if high == breakLevel and displayPerfectLevel and displayLevel and array.size(resistance_labels) > i  and not onClose
+        label currentLineLabel = array.get(resistance_labels, i) 
+        line.set_x2(currentLine, momentCTD)
+        label.set_x(currentLineLabel, momentCTD)
+        if not str.contains(label.get_text(currentLineLabel), " PDT")
+            label.set_text(currentLineLabel, str.tostring(high) + " PDT")
+        i += 1
+        int(na)
+    else
+        line.set_x2(currentLine, momentCTD)
+        if displayLevel and array.size(resistance_labels) > i
+            label currentLineLabel = array.get(resistance_labels, i) 
+            label.set_x(currentLineLabel, momentCTD)
+        i += 1
+        int(na)
+
+i2=0
+while i2 < array.size(support_HT) and array.size(support_HT) > 0
+    line currentLine = array.get(support_HT, i2)
+    float breakLevel = line.get_y1(currentLine)
+    if ((low < breakLevel and not onClose) or (OCTF_Close < breakLevel and onClose)) and ((waitForClose and barstate.isconfirmed) or not waitForClose)
+        alert(message="Support Crossing @ " + str.tostring(breakLevel))
+        array.remove(support_HT, i2)
+        if array.size(support_levels) > i2
+            array.remove(support_levels, i2)
+        line.delete(currentLine)
+        if displayLevel and array.size(support_labels) > i2
+            label currentLineLabel = array.get(support_labels, i2) 
+            array.remove(support_labels, i2)
+            label.delete(currentLineLabel)
+        int(na)
+    else if low == breakLevel and displayPerfectLevel and displayLevel and array.size(support_labels) > i2 and not onClose
+        label currentLineLabel = array.get(support_labels, i2)
+        line.set_x2(currentLine, momentCTD)
+        label.set_x(currentLineLabel, momentCTD)
+        if not str.contains(label.get_text(currentLineLabel), " PDB")
+            label.set_text(currentLineLabel, str.tostring(low) + " PDB")
+        i2 += 1
+        int(na)
+    else
+        line.set_x2(currentLine, momentCTD)
+        if displayLevel and array.size(support_labels) > i2
+            label currentLineLabel = array.get(support_labels, i2) 
+            label.set_x(currentLineLabel, momentCTD)
+        i2 += 1
+        int(na)
