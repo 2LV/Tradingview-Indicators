@@ -85,7 +85,7 @@ A simple indicator to plot 5 different types of moving averages (SMA, EMA, WMA, 
 
 # Disclaimer
 
-The trading indicators and strategies shared here are for educational purposes only. They do not constitute financial advice or recommendations. Trading carries risks, and past performance is not indicative of future results. The creator(s) of the project are not responsible for any losses from recommendations from any indicators under this project. Traders should exercise caution and conduct their own research before making any trading decisions.
+The trading indicators and strategies shared here are for educational purposes only. They do not constitute financial advice or recommendations. Trading carries risks, and past performance is not indicative of future results. The creators and contributors of the project are not responsible for any losses from recommendations from any indicators under this project. Traders should exercise caution and conduct their own research before making any trading decisions.
 
 # License
 
