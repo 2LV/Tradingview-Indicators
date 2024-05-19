@@ -30,7 +30,6 @@ textColor =input.color(defval=color.rgb(255, 255, 255), title='Text Color', grou
 textSize =input.string("Small", title="Text Size", options=["Auto", "Tiny", "Small", "Normal", "Large", "Huge"], group='Text Settings')
 
 // variables
-
 pivotTimeframe := switch pivotTimeframe
     '1m' => '1'
     '3m' => '3'
