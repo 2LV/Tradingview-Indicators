@@ -93,6 +93,6 @@ All scripts under project are licensed under [**CC BY-NC 4.0**](http://creativec
 
 Commercial reuse is **strictly prohibited**
 
-- discord @ nqmini
+- discord @ nqmicro
 - telegram @ [nqmicro](https://t.me/nqmicro)
 - email @ 123781023@proton.me
