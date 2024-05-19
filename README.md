@@ -4,7 +4,7 @@ A collections of different Tradingview indicators built in Pinescript V5 and the
 
 <br />
 
-## [Institutional Supply & Demand Zones](https://github.com/2LV/Tradingview-Indicators/blob/main/scripts/Institutional%20Supply%20%26%20Demand%20Zones)
+## [Institutional Supply & Demand Zones](https://github.com/2LV/Tradingview-Indicators/blob/main/indicators/Institutional%20Supply%20%26%20Demand%20Zones)
 This indicator aims to identify price levels where institutional investors have positioned their buy or sell orders. These buy orders establish "demand zones," while sell orders create "supply zones." Identifying these zones enables us to anticipate potential reversals in price trends, allowing us to profitably engage in these significant market movements alongside major institutions. These zones are formed when price action goes from balanced to imbalanced. These zones are based on orders. Unlike standard support and resistance levels, when price breaks below a demand zone or above a supply zone, these zones disappear from the chart. Supply is formed by a green candle followed by a major red candle that is at least double the size of previous green candle. The zone is then charted from the open of the green candle to the highest point in the candle. Vice versa for a demand zone (red candle into green candle). Typically when a zone is retested multiple times, it will have a higher chance of breaking as more and more orders are being filled. Add it to your chart [here](https://www.tradingview.com/script/eAO9uAu5-Institutional-Supply-and-Demand-Zones/)
 
 ### Features
@@ -20,7 +20,7 @@ First, make sure you are trading an institutionally traded instruments. Second, 
 
 ![image](https://github.com/2LV/Tradingview-Indicators/assets/70970973/3b0c8719-e79e-4677-999f-8f4400868a15)
 
-## [Reversal Pivot Points](https://github.com/8pz/tradingview-indicators/blob/main/scripts/Reversal%20Pivot%20Points) 
+## [Reversal Pivot Points](https://github.com/2LV/Tradingview-Indicators/blob/main/indicators/Reversal%20Pivot%20Points) 
 This indicator aims to identify price levels where price action has quickly reversed from. These "pivots" establish major levels where major liquidity is located. Unlike traditional support and resistance levels, when price breaks below or above a pivot, these pivots disappear from the chart. Add it to your chart [here](https://www.tradingview.com/script/OGeG7pyt-Reversal-Pivot-Points/)
 
 ### Features
@@ -44,7 +44,7 @@ This indicator aims to identify price levels where price action has quickly reve
 
 ![image](https://github.com/2LV/Tradingview-Indicators/assets/70970973/8f823bf0-69f7-4c27-a726-967af4ca3bfd)
 
-## [Abnormal Volume Scanner](https://github.com/2LV/Tradingview-Indicators/blob/main/scripts/Abnormal%20Volume%20Scanner)
+## [Abnormal Volume Scanner](https://github.com/2LV/Tradingview-Indicators/blob/main/indicators/Abnormal%20Volume%20Scanner)
 This indicator aims to revolutionize and simplify volume analysis through multiple different pattern recognition methods. Volume is the first piece of evidence in any moves in price action and retail traders must understand and analyze volume to properly assess future price action. Volume can be paired with a variety of different strategies and indicators for maximum efficiency. (Warning: It is recommended that you set the chart bottom margin to **0%** to remove the space between the bottom of the chart and volume)
 
 ### Features
@@ -69,7 +69,7 @@ This indicator aims to revolutionize and simplify volume analysis through multip
 
 ![image](https://github.com/2LV/Tradingview-Indicators/assets/70970973/5e717e0a-c7d9-4b38-8d2b-793290eb380d)
 
-## [Multiple Moving Average](https://github.com/8pz/tradingview-indicators/blob/main/scripts/Multiple%20Moving%20Averages) 
+## [Multiple Moving Average](https://github.com/2LV/Tradingview-Indicators/blob/main/indicators/Multiple%20Moving%20Averages) 
 A simple indicator to plot 5 different types of moving averages (SMA, EMA, WMA, HMA, RMA) and VWAP in different colors.
 
 ![image](https://github.com/2LV/Tradingview-Indicators/assets/70970973/30bdda4a-4369-4510-b472-b083f6ece1d8)
