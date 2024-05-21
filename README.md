@@ -1,6 +1,6 @@
 [Setup](https://github.com/2LV/tradingview-indicators?tab=readme-ov-file#setup) • [Disclaimer](https://github.com/2LV/tradingview-indicators?tab=readme-ov-file#disclaimer) • [License](https://github.com/2LV/tradingview-indicators?tab=readme-ov-file#license) <img align="right" src="https://github.com/2LV/Tradingview-Indicators/assets/70970973/74846972-8cdd-491e-9d35-272fe0a8167d" alt="Pinescript Logo" width="290" height="182.31" /> 
 
-A collections of different Tradingview indicators (and their corresponding trading strategies) and strategiesbuilt in Pinescript V5. All indicators on this repository are up to date, but Tradingview indicators can be behind on updates so please make sure to use the most updated indicator for the most accurate results. Please contact me with suggestions for new indicators/strategies/chagnes
+A collections of different Tradingview indicators (and their corresponding trading strategies) and strategiesbuilt in Pinescript V5. All indicators on this repository are up to date, but Tradingview indicators can be behind on updates so please make sure to use the most updated indicator for the most accurate results. Please contact me with suggestions for new indicators/strategies/changes
 
 <br />
 
